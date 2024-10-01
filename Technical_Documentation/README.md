@@ -4,42 +4,16 @@
 
 This document presents the Unified Modeling Language (UML) diagrams for the HBnB (Holberton Bed and Breakfast) project, a class assignment designed to demonstrate proficiency in software architecture and design principles.
 
-## Purpose
-
-The purpose of this documentation is to:
-1. Showcase understanding of UML diagram types and their applications.
-2. Illustrate the proposed architecture and design of the HBnB system.
-3. Serve as a reference for implementing the project's code.
-
-## Contents
-
-This documentation includes:
-1. A high-level package diagram depicting the layered architecture of HBnB.
-2. A detailed class diagram of the Business Logic layer.
-3. Sequence diagrams for key API operations.
-4. Explanations of design choices and diagram elements.
-
-## Project 1 Context
-
-HBnB is a simplified Airbnb-like application developed as part of the Holberton curriculum. It aims to demonstrate skills in:
-- Object-Oriented Programming (OOP)
-- Software architecture design
-- UML diagramming
-- API design and implementation
-
 Note: This is a theoretical design for educational purposes and may not reflect all real-world complexities of a production system.
 
 ## Summary
 
 - [HBnB Project - UML Documentation](#hbnb-project---uml-documentation)
   - [Introduction](#introduction)
-  - [Purpose](#purpose)
-  - [Contents](#contents)
-  - [Project 1 Context](#project-1-context)
   - [Summary](#summary)
   - [Glossary](#glossary)
+  - [TOO LONG DIDN'T READ: on UML Diagrams and Their Relationships](#too-long-didnt-read-on-uml-diagrams-and-their-relationships)
   - [UML in Python OOP](#uml-in-python-oop)
-    - [TL;DR on UML Diagrams and Their Relationships](#tldr-on-uml-diagrams-and-their-relationships)
   - [UML Class Diagram: The Pet Shop](#uml-class-diagram-the-pet-shop)
     - [Basic format](#basic-format)
     - [UML Class Relationships](#uml-class-relationships)
@@ -101,15 +75,9 @@ Note: This is a theoretical design for educational purposes and may not reflect 
 **U**
 - **UML (Unified Modeling Language)**: A standardized visual modeling language used in software engineering to create blueprints of a system.
 
-## UML in Python OOP
+## TOO LONG DIDN'T READ: on UML Diagrams and Their Relationships
 
-**Definition:** Unified Modeling Language (UML) is a standardized way to visualize the design of a system, especially for Object-Oriented Programming (OOP). It acts as a **blueprint** for you code, like architectural blueprints for buildings.
-
-**Syntax:**
-
-There is no direct syntax for UML since there are different types of UML structures. Here as the main three **Class Diagrams**, **Sequence Diagrams**, **Package Diagrams**.
-
-### TL;DR on UML Diagrams and Their Relationships
+Too lazy too read everything? Here is a quick sum up.
 
 **1. Class Diagrams**  
 - **Purpose**: Show the static structure of a system's classes, their attributes, methods, and relationships.  
@@ -139,6 +107,14 @@ There is no direct syntax for UML since there are different types of UML structu
 
 These diagrams are fundamental to designing object-oriented systems, allowing developers to visualize class structures, interactions, and dependencies within and across systems.
 
+
+## UML in Python OOP
+
+**Definition:** Unified Modeling Language (UML) is a standardized way to visualize the design of a system, especially for Object-Oriented Programming (OOP). It acts as a **blueprint** for you code, like architectural blueprints for buildings.
+
+**Syntax:**
+
+There is no direct syntax for UML since there are different types of UML structures. Here as the main three **Class Diagrams**, **Sequence Diagrams**, **Package Diagrams**.
 
 ## UML Class Diagram: The Pet Shop
 
