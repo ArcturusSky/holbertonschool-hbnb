@@ -64,18 +64,18 @@ I thought I had finish the task 0 completly but no. I made the biggest part thou
 # Arc logs
 # HBNB Project - Part 1
 
-## Current Task: Task 1 - Detailed Class Diagram for Business Logic Layer
+## Current Task: Task 1 and Task 2
 
 ### Date: 4/10/2024
 
 ### Goal for today: 
 - [x] Finishing task 0
-- [ ] Finishing task 1
-- [ ] Finishing task 2
+- [x] Finishing task 1
+- [x] Finishing task 2
 - [ ] Finishing task 3
 
 #### Status:
-- **Task Description:** Design a detail class Diagram gor the Business Logic layer of the HBNB application
+- **Task Description:** Design a detail class Diagram gor the Business Logic layer of the HBNB application. And 4 Sequence Diagram to illustrate API call.
 
 - **Before starting:** I reflect a lot about the design of the package layer again. Actually it wasn't over yesterday and finished it today. I thought about specific colors for each layer to be easier to read in the end.
 
@@ -96,13 +96,14 @@ I thought I had finish the task 0 completly but no. I made the biggest part thou
 - [x] Adding more according to AI if I didn't forget anything
 
 #### To-Do List for task 2:
-- [ ] Taking a simple example of class diagram
-- [ ] Matching color scheme etc
-- [ ] Matching format
-- [ ] Adding more according to AI if I didn't forget anything
+- [x] Taking a simple example of class diagram
+**abandon/impossible** Matching color scheme etc
+**abandon/impossible** Matching format
+**abandon/impossible** Adding more according to AI if I didn't forget anything
+- [x] Keep the simplest possible
 
 #### To-Do List for task 3:
-- [x] Delegating to Esteban to take a look
+**abandon/impossible** Delegating to Esteban to take a look
 - [x] Keeping my own logs in these files
 ---
 
@@ -121,6 +122,8 @@ I thought I had finish the task 0 completly but no. I made the biggest part thou
 - I just understood now the use and principle of "BaseModel". So I'm updating the whole thing with it.
 
 - One last thing with task 1 : Relationships and **Multiplicity** which is difficult to create
+
+- It is time. I already sent what I had I'm just updating the last log. I won't lie, for the task 2 I needed an A.I to provide me a basemodel. Not that I wouldn't have understand how to do it by myself but I was lacking time. Lot of time. I had to do everything by myself while hoping until the very end that I would have help from my teammate. That's why the sequence API calls are less refined than the others.
 ---
 
 ## End of day Log Entry
@@ -128,24 +131,24 @@ I thought I had finish the task 0 completly but no. I made the biggest part thou
 ### Tasks Completed:
 - [x] Task 1: class diagram
 - [x] Task 2: Sequence Diagrams
-- [ ] Task 3: [Brief description]
+**abandon/impossible** Task 3: Full documentation
 
 ### Progress Summary:
-To sum up real quick caus I don't have enough time, I managed to finish a w
+To sum up real quick caus I don't have enough time, I managed to finish a refine class diagram for the task 1. Very polished I think. I thought I wouldn't have enough time to do at least the diagram for task 2 but with some AI help I could. It provided me the base model and then I did the rest of it. But I did it with mermaid instead of Visual Paradigm because it was easier to do actually than what I thought. Visual Paradigm is beautiful but take a LOT of time actually. Mermaid is more direct. Will use it next time.
 
 ### Challenges Encountered:
-- [Challenge 1]
-- [Challenge 2]
+- I can't count on my teammate.
+- I had to do everything alone since my teammate told me he was working on something but didn't
+- Rushed things at the end
 
 ### Solutions Implemented:
-- [Solution for Challenge 1]
-- [Solution for Challenge 2]
+- Improvise and use A.I as partner instead.
 
 ### Next Steps:
 - [ ] [Next task to be worked on]
 - [ ] [Another upcoming task]
 
 ### Notes:
-[Any additional observations, ideas, or things to remember]
+I'm exhausted and drained. Time has ran out and I'm over now. I sent at least the 4 diagrams.
 
 ---------
