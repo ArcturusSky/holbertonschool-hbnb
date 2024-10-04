@@ -1,4 +1,5 @@
-# HBNB Project - Part 1
+# Arc logs
+# HBNB Project - Part 1 -
 
 ## Current Task: 0. High-Level Package Diagram 
 
@@ -22,8 +23,8 @@
 - [x] Creating a poor draft
 - [x] Creating just the bare potential squeleton
 - [x] Check with other if on the right track
-- [ ] Identify the whole "things" I have to put inside
-- [ ] Refactoring the diagram to something better
+- [x] Identify the whole "things" I have to put inside
+- [x] Refactoring the diagram to something better
 
 ---
 
@@ -35,29 +36,28 @@ Due to personnal taste, I decided to kinda give a "waterfall" aspect of the whol
 
 I still have a lot to do, filling each layer and components of these layers with what I already know but I let space to be able to change and adapt.
 
+
+
 ---
 
 ## End of day Log Entry
 
 ### Tasks Completed:
-- [ ] Task 1: [Brief description]
-- [ ] Task 2: [Brief description]
-- [ ] Task 3: [Brief description]
+- [x] Task 0 - Created the package UML I think...
 
 ### Progress Summary:
 [Provide a brief overview of what was accomplished today]
 
 ### Challenges Encountered:
-- [Challenge 1]
-- [Challenge 2]
+- I overthink too much
 
 ### Solutions Implemented:
-- [Solution for Challenge 1]
-- [Solution for Challenge 2]
+- Trying to talk to others peers to see if I'm going too far
 
 ### Next Steps:
-- [ ] [Next task to be worked on]
-- [ ] [Another upcoming task]
+- Task 1 - Class UML Diagram
+- Task 2 - Sequence UML Diagram
+- Task 3 - Full documentation (kinda in progress with these logs)
 
 ### Notes:
 [Any additional observations, ideas, or things to remember]
