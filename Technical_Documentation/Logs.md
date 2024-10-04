@@ -93,7 +93,7 @@ I thought I had finish the task 0 completly but no. I made the biggest part thou
 - [x] Matching color scheme etc
 - [x] Matching format
 - [x] Adding attributes and methods
-- [ ] Adding more according to AI if I didn't forget anything
+- [x] Adding more according to AI if I didn't forget anything
 
 #### To-Do List for task 2:
 - [ ] Taking a simple example of class diagram
@@ -126,12 +126,12 @@ I thought I had finish the task 0 completly but no. I made the biggest part thou
 ## End of day Log Entry
 
 ### Tasks Completed:
-- [ ] Task 1: [Brief description]
-- [ ] Task 2: [Brief description]
+- [x] Task 1: class diagram
+- [x] Task 2: Sequence Diagrams
 - [ ] Task 3: [Brief description]
 
 ### Progress Summary:
-[Provide a brief overview of what was accomplished today]
+To sum up real quick caus I don't have enough time, I managed to finish a w
 
 ### Challenges Encountered:
 - [Challenge 1]
