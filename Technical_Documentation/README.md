@@ -1,538 +1,73 @@
-# HBnB Project - UML Documentation
+# HBNB Project
 
 ## Introduction
 
-This document presents the Unified Modeling Language (UML) diagrams for the HBnB (Holberton Bed and Breakfast) project, a class assignment designed to demonstrate proficiency in software architecture and design principles.
+This repository contains the HBNB (Holberton Bed and Breakfast) project, a school assignment designed to demonstrate proficiency in software architecture, design principles, and Object-Oriented Programming (OOP) using Python.
 
-Note: This is a theoretical design for educational purposes and may not reflect all real-world complexities of a production system.
+## Project Overview
 
-## Summary
+The HBNB project aims to create a simplified Airbnb-like application. It involves designing and implementing a system that manages various entities such as Users, Places, Reviews, and Amenities.
 
-- [HBnB Project - UML Documentation](#hbnb-project---uml-documentation)
-  - [Introduction](#introduction)
-  - [Summary](#summary)
-  - [Glossary](#glossary)
-  - [TOO LONG DIDN'T READ: on UML Diagrams and Their Relationships](#too-long-didnt-read-on-uml-diagrams-and-their-relationships)
-  - [UML in Python OOP](#uml-in-python-oop)
-  - [UML Class Diagram: The Pet Shop](#uml-class-diagram-the-pet-shop)
-    - [Basic format](#basic-format)
-    - [UML Class Relationships](#uml-class-relationships)
-    - [Summary of Symbols:](#summary-of-symbols)
-  - [UML Sequence Diagram: Ordering a Pizza](#uml-sequence-diagram-ordering-a-pizza)
-    - [Basic format](#basic-format-1)
-    - [UML Sequence Diagram Relationship Representations:](#uml-sequence-diagram-relationship-representations)
-    - [Summary of Symbols for Sequence Diagrams:](#summary-of-symbols-for-sequence-diagrams)
-  - [UML Package Diagram: E-Commerce Application](#uml-package-diagram-e-commerce-application)
-    - [Basic format](#basic-format-2)
-    - [UML Package Diagram Relationship Representations:](#uml-package-diagram-relationship-representations)
-    - [Summary of Symbols for Package Diagrams:](#summary-of-symbols-for-package-diagrams)
-  - [Conclusion](#conclusion)
-  - [Author](#author)
+## Structure
 
-## Glossary
+### High-Level Architecture
+The project follows a three-layer architecture:
+- **Presentation Layer**: Handles user interactions and exposes APIs.
+- **Business Logic Layer**: Contains the core business logic and models for the system.
+- **Persistence Layer**: Responsible for data storage and retrieval.
 
-**A**
-- **API (Application Programming Interface)**: A set of protocols, routines, and tools for building software applications.
-- **Aggregation**: A specialized form of association that represents a "whole-part" relationship where the "part" can exist independently of the "whole".
-- **Association**: A relationship between two classes where one class uses or interacts with another.
-- **Attribute**: A data member (variable) of a class.
+### Key Components
+- **Users**: Represents the users of the system.
+- **Places**: Represents the places listed on the platform.
+- **Reviews**: Represents the reviews left by users for places.
+- **Amenities**: Represents the amenities available at places.
 
-**C**
-- **Class**: In OOP, a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).
-- **Class Diagram**: A structural diagram that shows the system's classes, their attributes, methods, and the relationships among objects.
-- **Composition**: A stronger form of aggregation where the "part" cannot exist without the "whole".
+## Installation and Usage
 
-**D**
-- **Dependency**: A relationship where a change in one element may affect another element.
-
-**F**
-- **Facade Pattern**: A design pattern that provides a simplified interface to a complex subsystem.
-
-**I**
-- **Inheritance**: A relationship where one class (subclass) is based on another class (superclass).
-
-**L**
-- **Lifeline**: In sequence diagrams, a vertical line that represents the existence of an object over time.
-
-**M**
-- **Message**: In sequence diagrams, a communication between objects.
-- **Method**: A function that belongs to a class.
-
-**O**
-- **Object**: An instance of a class.
-- **OOP (Object-Oriented Programming)**: A programming paradigm based on the concept of "objects", which can contain data and code.
-
-**P**
-- **Package**: A general-purpose mechanism for organizing elements into groups.
-- **Package Diagram**: A structural diagram that depicts how a system is split up into logical groupings by showing the dependencies among these groupings.
-
-**R**
-- **Relationship**: A connection between classes or objects in UML diagrams.
-
-**S**
-- **Sequence Diagram**: A behavioral diagram that shows how objects interact in a particular scenario of a use case.
-
-**U**
-- **UML (Unified Modeling Language)**: A standardized visual modeling language used in software engineering to create blueprints of a system.
-
-## TOO LONG DIDN'T READ: on UML Diagrams and Their Relationships
-
-Too lazy too read everything? Here is a quick sum up.
-
-**1. Class Diagrams**  
-- **Purpose**: Show the static structure of a system's classes, their attributes, methods, and relationships.  
-- **Key Relationships**:  
-  - **Association (`--->`)**: Represents a connection between classes (e.g., a Book is associated with an Author).  
-  - **Aggregation (`<>`)**: A "whole-part" relationship where the part can exist independently (e.g., Library has Books).  
-  - **Composition (`*--`)**: A stronger whole-part relationship where parts cannot exist without the whole (e.g., a House has Rooms that can't exist without the House).  
-  - **Generalization (`--|>`)**: Inheritance relationship (e.g., Dog is a subclass of Animal).  
-  - **Dependency (`..>`)**: One class depends on another for functionality.
-
-**2. Sequence Diagrams**  
-- **Purpose**: Show how objects interact in a particular sequence of messages or actions over time.  
-- **Key Relationships**:  
-  - **Message (`-->`)**: Represents the flow of communication between objects (e.g., an Order object sends a confirmation message to a Customer).  
-  - **Return (`<--`)**: Shows the return of a response to a sent message.  
-  - **Self-call (`↺`)**: An object calls its own method during an interaction.  
-  - **Create (`-->>`)**: Represents the instantiation of a new object during a sequence.
-
-**3. Package Diagrams**  
-- **Purpose**: Organize large systems into packages (or modules) and show the dependencies between them.  
-- **Key Relationships**:  
-  - **Dependency (`..>`)**: One package depends on another for its operation (e.g., PackageA depends on PackageB).  
-  - **Association (`--->`)**: Packages interact or communicate with each other.  
-  - **Generalization (`--|>`)**: Shows inheritance or hierarchical relationships between packages (e.g., PackageChild inherits from PackageParent).  
-  - **Containment (`+--->`)**: One package contains another (e.g., PackageOuter contains PackageInner).  
-  - **Import (`<|>`)**: Indicates that one package imports elements from another package.
-
-These diagrams are fundamental to designing object-oriented systems, allowing developers to visualize class structures, interactions, and dependencies within and across systems.
-
-
-## UML in Python OOP
-
-**Definition:** Unified Modeling Language (UML) is a standardized way to visualize the design of a system, especially for Object-Oriented Programming (OOP). It acts as a **blueprint** for you code, like architectural blueprints for buildings.
-
-**Syntax:**
-
-There is no direct syntax for UML since there are different types of UML structures. Here as the main three **Class Diagrams**, **Sequence Diagrams**, **Package Diagrams**.
-
-## UML Class Diagram: The Pet Shop
-
-**Definition**
-A class diagram is a type of UML diagram that shows the structure of a system by displaying its classes, attributes, operations, and relationships between objects.
-
-### Basic format
-
-A class in UML is represented by a rectangle divided into three sections:
-1. Top: Class name
-2. Middle: Attributes (properties)
-3. Bottom: Operations (methods)
-
-*Example:*
-
-```scss
-+---------------+          +-------------+          +--------------+
-|   PetShop     |<>------->|    Pet      |<>------->|   Owner      |
-+---------------+          +-------------+          +--------------+
-| - location    |          | - name      |          | - name       |
-| - inventory   |          | - species   |          | - contactInfo|
-+---------------+          | - age       |          +--------------+
-| + addPet()    |          +-------------+          | + adoptPet() |
-| + removePet() |          | + feed()    |          +--------------+
-+---------------+          | + play()    | 
-                           +-------------+
-
+### Installation
+To set up the project, follow these steps:
+```bash
+git clone https://github.com/your-username/hbnb.git
+cd hbnb
 ```
 
-**Explanations, breakdown of the example:**
-
-- **Class Names**: Animal, Dog, and Cat
-- **Attributes**: 
-  - Animal has name (String) and age (int)
-  - Dog has breed (String)
-  - Cat has furColor (String)
-- **Operations**: 
-  - Animal has makeSound() and eat()
-  - Dog has fetch()
-  - Cat has scratch()
-- **Relationships**: The arrows pointing from Dog and Cat to Animal represent inheritance (Dog and Cat are subclasses of Animal)
-
-**Mnemonics and Analogies:**
-
-1. `CAM` - Remember the three parts of a class: `C`lass name, `A`ttributes, and `M`ethodes.
-
-2. Think of the class diagram as a "pet shop catalog". Each box is like a page in the catalog describing a type of pet (class), its features (attributes), and what it can do (methods).
-
-3. The inheritance arrows are like family trees - they show which "pet families" are related.
-
-### UML Class Relationships
-
-**Definition**
-UML class diagrams depict the relationships between different classes in a system. These relationships are represented using various types of associations, which are indicated by different types of lines and arrows.
-
-1. **Association (`--->`):**
-   - **Description**: A basic connection between two classes where one class uses or interacts with the other.
-   - **Example**: A `Customer` can place an `Order`.
-   - **Symbol**: `--->`
-
-   ```sql
-   +-----------+     --->     +-----------+
-   | Customer  |              |  Order    |
-   +-----------+              +-----------+
-   ```
-
-2. **Bidirectional Association (`<--->`):**
-   - **Description**: Both classes are aware of each other and can communicate back and forth.
-   - **Example**: An `Employee` works in a `Department`, and the `Department` knows its `Employees`.
-   - **Symbol**: `<--->`
-
-   ```sql
-   +------------+    <--->    +------------+
-   |  Employee  |              | Department |
-   +------------+              +------------+
-   ```
-
-3. **Aggregation (`<>--->`):**
-   - **Description**: A "whole-part" relationship where the part can exist independently of the whole.
-   - **Example**: A `Team` consists of `Players`, but players can exist without the team.
-   - **Symbol**: `<>--->`
-
-   ```sql
-   +----------+    <>--->    +---------+
-   |  Team    |              | Player  |
-   +----------+              +---------+
-   ```
-
-4. **Composition (`*--->`):**
-   - **Description**: A "whole-part" relationship where the part cannot exist without the whole. If the whole is destroyed, the part is destroyed too.
-   - **Example**: A `House` consists of `Rooms`. If the house is destroyed, the rooms are also destroyed.
-   - **Symbol**: `*--->`
-
-   ```sql
-   +----------+    *--->     +--------+
-   |  House   |              |  Room  |
-   +----------+              +--------+
-   ```
-
-5. **Generalization/Inheritence (`--|>`):**
-   - **Description**: Represents an "is-a" relationship between a superclass and subclass (inheritance).
-   - **Example**: A `Dog` is a type of `Animal`.
-   - **Symbol**: `--|>`
-
-   ```sql
-   +--------+    --|>     +--------+
-   |  Dog   |              | Animal |
-   +--------+              +--------+
-   ```
-
-6. **Realization (`..|>`):**
-   - **Description**: Represents the relationship between a class and an interface it implements.
-   - **Example**: A `Button` class realizes the `Clickable` interface.
-   - **Symbol**: `..|>`
-
-   ```sql
-   +---------+   ..|>     +------------+
-   |  Button |            |  Clickable |
-   +---------+            +------------+
-   ```
-
-7. **Dependency (`..-->`):**
-   - **Description**: Represents that one class depends on another to perform a function (e.g., method parameters or local variables).
-   - **Example**: A `Car` depends on an `Engine` to function.
-   - **Symbol**: `..-->`
-
-   ```sql
-   +-------+   ..-->    +---------+
-   |  Car  |            |  Engine |
-   +-------+            +---------+
-   ```
-
-### Summary of Symbols:
-- **Association**: `--->`
-- **Bidirectional Association**: `<--->`
-- **Aggregation**: `<>--->`
-- **Composition**: `*--->`
-- **Generalization (Inheritance)**: `--|>`
-- **Realization**: `..|>`
-- **Dependency**: `..-->`
-
-## UML Sequence Diagram: Ordering a Pizza
-
-**Definition**
-A UML sequence diagram is a type of interaction diagram that shows how objects interact with each other over time. It depicts the messages (or method calls) exchanged between objects in the order they occur.
-
-### Basic format
-
-In a sequence diagram, you have:
-1. **Lifelines** - Vertical lines representing the objects involved in the interaction.
-2. **Messages** - Horizontal arrows between lifelines representing the flow of information or method calls.
-3. **Time** - Time flows from top to bottom.
-
-*Example:*
-
-```sql
-         Customer       Restaurant
-           |               |
-           |     placeOrder()
-           |--------------->|
-           |               |  processOrder()
-           |<---------------| 
-           |               |   prepareOrder()
-           |<---------------|
-           |     deliverOrder()
-           |--------------->|
-           |               |   receiveOrder()
-           |<---------------|
-```
-
-**Explanations, breakdown of the example:**
-
-1. The Customer and Restaurant are the two objects/lifelines involved in this interaction.
-2. The Customer initiates the interaction by calling the `placeOrder()` method on the Restaurant.
-3. The Restaurant processes the order, prepares it, and then delivers the order back to the Customer.
-4. The Customer receives the order.
-
-**Mnemonics and Analogies:**
-
-1. The vertical lifelines can be seen as "timelines" for each object, showing how they interact over time.
-
-### UML Sequence Diagram Relationship Representations:
-
-1. **Synchronous Message (`---->`):**
-   - **Description**: A message sent from one object to another where the sender waits for the receiver to finish processing the message before continuing. This is the most common type of message.
-   - **Example**: A `Customer` sends a `placeOrder()` message to the `Order` object.
-   - **Symbol**: `---->`
-
-   ```sql
-   +------------+      ---->      +------------+
-   |  Customer  |                 |   Order    |
-   +------------+                 +------------+
-   ```
-
-2. **Return Message (`<----`):**
-   - **Description**: Represents the return of control from the receiver object to the sender object. This usually happens after processing a synchronous message.
-   - **Example**: After processing `placeOrder()`, the `Order` object returns confirmation to the `Customer`.
-   - **Symbol**: `<----`
-
-   ```sql
-   +------------+     <----      +------------+
-   |  Customer  |                |   Order    |
-   +------------+                +------------+
-   ```
-
-3. **Asynchronous Message (`---->>`):**
-   - **Description**: A message sent from one object to another where the sender does not wait for the receiver to complete the operation before moving on. It typically represents events or signals.
-   - **Example**: A `Sensor` sends a `signal()` to the `AlarmSystem` and continues its operation without waiting for a response.
-   - **Symbol**: `---->>`
-
-   ```sql
-   +------------+     ---->>      +------------+
-   |   Sensor   |                 | AlarmSystem|
-   +------------+                 +------------+
-   ```
-
-4. **Self Message (`---->`) (on the same object):**
-   - **Description**: A message an object sends to itself to invoke its own methods. Often used to represent recursion or internal operations.
-   - **Example**: A `User` object sends an internal `authenticate()` message to itself.
-   - **Symbol**: `---->` (looping back to the same object)
-
-   ```sql
-   +----------+
-   |   User   |
-   +----------+
-        |
-   ---->|
-   authenticate()
-   ```
-
-5. **Activation Box**:  
-   - **Description**: The vertical rectangle on an object’s lifeline that shows the duration of the object's method execution. Often used in synchronous messages.
-   - **Example**: The `Server` object is active while handling a `request()` from the `Client`.
-   - **Symbol**: A vertical bar on the lifeline during message handling.
-
-   ```sql
-   +----------+         +---------+
-   |  Client  |         |  Server |
-   +----------+         +---------+
-       |                 |
-       ----> request()   |
-       |  [Activation]   |
-       |                 |
-   ```
-
-6. **Lifeline (`|`)**:  
-   - **Description**: Represents the existence of an object over time during the interaction. Messages are exchanged along the lifelines.
-   - **Example**: `Client` and `Server` lifelines during their interaction.
-   - **Symbol**: `|`
-
-   ```sql
-   +----------+         +---------+
-   |  Client  |         |  Server |
-   +----------+         +---------+
-        |                 |
-   ```
-
-7. **Destruction (`X`)**:
-   - **Description**: Represents the termination of an object’s existence after it finishes executing a certain method. It usually appears as a cross (X) at the bottom of the object's lifeline.
-   - **Example**: The `Session` object is destroyed after completing a task.
-   - **Symbol**: `X`
-
-   ```sql
-   +----------+
-   | Session  |
-   +----------+
-        |
-        X
-   ```
-
-### Summary of Symbols for Sequence Diagrams:
-- **Synchronous Message**: `---->`
-- **Return Message**: `<----`
-- **Asynchronous Message**: `---->>`
-- **Self Message**: `---->` (looping to the same object)
-- **Activation Box**: Vertical bar on the lifeline during method execution.
-- **Lifeline**: Vertical line representing an object’s existence.
-- **Destruction**: `X` at the end of an object's lifeline.
-
-## UML Package Diagram: E-Commerce Application
-
-**Definition**
-A UML package diagram is a type of structural diagram that shows the organization and dependencies between packages (modules or subsystems) within a system. Packages are used to group related classes, interfaces, and other elements together.
-
-### Basic format
-
-In a package diagram, you have:
-1. **Packages** - Represented by rectangles with a tab at the top.
-2. **Dependencies** - Represented by dashed arrows between packages, indicating that one package depends on another.
-
-*Example:*
-
-```sql
-+--------------------+
-|   E-Commerce App   |
-+--------------------+
-|     +-------+      |
-|     |Orders |      |
-|     +-------+      |
-|     +-------+      |
-|     |Payments      |
-|     +-------+      |
-|     +-------+      |
-|     |Shipping|     |
-|     +-------+      |
-+--------------------+
-        |
-        |
-        v
-+--------------------+
-|      Database      |
-+--------------------+
-```
-
-**Explanations, breakdown of the example:**
-
-1. The main **package** is the **"E-Commerce App"**, which contains three sub-packages: *Orders*, *Payments*, and *Shipping*.
-2. The sub-packages depend on the "Database" package, as indicated by the dashed arrows. This means that the functionality of the sub-packages relies on the data stored in the database.
-
-**Mnemonics and Analogies:**
-
-1. Think of the package diagram as a "building blueprint" - the **main package** is the **overall building**, and the **sub-packages** are the different **rooms** or **floors** within the building.
-
-2. Imagine a **grocery store**. The **main package** would be the **grocery store**, and the **sub-packages** could be the **different departments** like **Produce**, **Dairy**, and **Bakery**. The departments depend on the central inventory (database) to function.
-
-### UML Package Diagram Relationship Representations:
-
-1. **Dependency (`..>`)**:
-   - **Description**: Represents a dependency relationship between two packages, meaning one package depends on another to function. It shows that changes in the target package may impact the dependent package.
-   - **Example**: `PackageA` depends on `PackageB` for certain functionalities.
-   - **Symbol**: `..>`
-
-   ```sql
-   +-----------+     ..>     +-----------+
-   | PackageA  |             | PackageB  |
-   +-----------+             +-----------+
-   ```
-
-2. **Association (`--->`)**:
-   - **Description**: Represents an association between two packages. It shows that one package uses or communicates with another.
-   - **Example**: `PackageX` is associated with `PackageY`.
-   - **Symbol**: `--->`
-
-   ```sql
-   +-----------+     --->     +-----------+
-   | PackageX  |              | PackageY  |
-   +-----------+              +-----------+
-   ```
-
-3. **Generalization (`--|>`)**:
-   - **Description**: Represents an inheritance relationship between two packages. The child package inherits from the parent package.
-   - **Example**: `PackageChild` inherits functionalities from `PackageParent`.
-   - **Symbol**: `--|>`
-
-   ```sql
-   +--------------+    --|>     +---------------+
-   | PackageChild |             | PackageParent |
-   +--------------+             +---------------+
-   ```
-
-4. **Realization (`..|>`)**:
-   - **Description**: Represents the implementation of an interface by a package. The package realizes the operations declared by the interface package.
-   - **Example**: `ConcretePackage` implements the `InterfacePackage`.
-   - **Symbol**: `..|>`
-
-   ```sql
-   +-------------------+    ..|>    +-------------------+
-   | ConcretePackage   |            | InterfacePackage  |
-   +-------------------+            +-------------------+
-   ```
-
-5. **Containment (`+--->`)**:
-   - **Description**: Represents a containment relationship, where one package contains another package inside it. This is often used to depict a package hierarchy.
-   - **Example**: `PackageOuter` contains `PackageInner`.
-   - **Symbol**: `+--->`
-
-   ```sql
-   +----------------+     +--->     +----------------+
-   | PackageOuter   |                | PackageInner   |
-   +----------------+                +----------------+
-   ```
-
-6. **Merge (`<>--->`)**:
-   - **Description**: Represents a merge relationship between two packages, where elements of one package are merged into another package, forming a combined package.
-   - **Example**: `PackageA` merges into `PackageB`.
-   - **Symbol**: `<>--->`
-
-   ```sql
-   +-----------+   <>--->    +-----------+
-   | PackageA  |             | PackageB  |
-   +-----------+             +-----------+
-   ```
-
-7. **Import (`<|>`)**:
-   - **Description**: Represents an import relationship where one package imports elements from another package. This is similar to a dependency but with more emphasis on reusable components.
-   - **Example**: `PackageA` imports elements from `PackageB`.
-   - **Symbol**: `<|>`
-
-   ```sql
-   +-----------+    <|>     +-----------+
-   | PackageA  |             | PackageB  |
-   +-----------+             +-----------+
-   ```
-
-### Summary of Symbols for Package Diagrams:
-- **Dependency**: `..>`
-- **Association**: `--->`
-- **Generalization**: `--|>`
-- **Realization**: `..|>`
-- **Containment**: `+--->`
-- **Merge**: `<>--->`
-- **Import**: `<|>`
-
-## Conclusion
-
-This whole course aimed to be a - kind of - concise course about the three types of UML diagrams necessary to do the project HBNB. It only aimed to be educational for myself
-
+### Usage
+- **API Endpoints**: Detailed documentation on how to use the API endpoints will be provided in the API section.
+- **Running the Application**: Instructions on how to run the application will be included in the `README.md` of the relevant subdirectories.
+
+## Diagrams
+
+### UML Diagrams
+- ![High-Level Package Diagram](https://media.discordapp.net/attachments/385020139839422464/1291886352366964799/Package_Diagram__HBNB.png?ex=6701ba6c&is=670068ec&hm=fe40ca035cf7794fbf819a0d63542cd466dfabf07b6b5f786c139616a9765e53&=&format=webp&quality=lossless&width=711&height=994)
+  - Describes the overall architecture and dependencies.
+- ![Detailed Class Diagram](https://media.discordapp.net/attachments/385020139839422464/1291886349322027028/Class_Diagram_-_Business_Layer__HBNB.png?ex=6701ba6b&is=670068eb&hm=4a8ae0ee5d8705bc82741103b0778b195e24fcb43f356d42908f5c0a38da1b3c&=&format=webp&quality=lossless&width=778&height=994)
+  - Shows the classes, attributes, methods, and relationships.
+- ![Sequence Diagrams - User Registration](https://media.discordapp.net/attachments/385020139839422464/1291886351968370768/HBNB__Sequence_Diagram_-_API_Call_-_User-_Registration.png?ex=6701ba6c&is=670068ec&hm=56d3effd49ce76a47a6a511a6181e294d22bf325445bb5fa1fb06ec13212d474&=&format=webp&quality=lossless&width=1164&height=513)
+- ![Sequence Diagrams - Place Creation](https://media.discordapp.net/attachments/385020139839422464/1291886350387122249/HBNB__Sequence_-_API_Call_-_Place_Creation.png?ex=6701ba6c&is=670068ec&hm=263b0f9e2f72cbaaea86dd7a24d7c5e540ae378ffde948427724b7817e568bbd&=&format=webp&quality=lossless&width=1164&height=504)
+- ![Sequence Diagrams - Submit Review](https://media.discordapp.net/attachments/385020139839422464/1291886351268188180/HBNB__Sequence_-_API_Call_-_Review_Submission-.png?ex=6701ba6c&is=670068ec&hm=6a8444f8ae2232c2fb3c6a724cad8bb12b2028dcb76843bda4300d124ab11960&=&format=webp&quality=lossless&width=1164&height=485)
+- ![Sequence Diagrams - Fetching a List of Places](https://media.discordapp.net/attachments/385020139839422464/1291886349850513630/HBNB___Sequence__API_Call_Fetching_a_List.png?ex=6701ba6b&is=670068eb&hm=77b9aa6ad5b1e01a3ac37a6a97ab8a4fda315655e8c09f084a37157411fae629&=&format=webp&quality=lossless&width=1164&height=463)
+  - Illustrates the interaction flow for key API calls.
+
+### Explanatory Notes
+Each diagrams are either accompany with notes or documented in the Logs.
+
+## Contributions
+
+No contributor desired.
 
 ## Author
 
-Anne-Cécile Besse (Arc)
+- [Arc](https://github.com/ArcturusSky)
+
+### Key Points:
+
+- **Clear Introduction**: Provides an overview of the project.
+- **Project Structure**: Describes the high-level architecture and key components.
+- **UML Diagrams**: References the different types of UML diagrams included.
+- **Installation and Usage**: Gives instructions on setting up and running the project.
+- **Documentation**: Links to detailed documentation sections.
+- **Contributions**: Encourages contributions and points to guidelines.
+- **Authors and License**: Lists the authors and the license under which the project is released.
+- **Resources**: Provides links to additional resources for learning.
+
+This `README.md` file is designed to be clear, concise, and informative, making it easy for others to understand and engage with your HBNB project.
