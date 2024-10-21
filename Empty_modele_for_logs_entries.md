@@ -1,58 +1,57 @@
-# HBNB Project - Part 1
+# HBNB Project - Part 
 
-## Current Task:
+## Date: 
 
-### Date:
+### Current Task: 
 
-#### Status:
+***Status:***
 - **Task Description:** 
 
-- **Before starting:** 
+- **Before starting:**
 
-#### Challenges/Blockers:
+***Challenges/Blockers:***
 - **Current Challenges:** 
 - **Potential Solutions:** 
 
-#### Notes:
-- **Ideas:**
-- **Questions:** 
+***Notes***
+- **Ideas:** 
+- **Questions:**
 - **Reminders:** 
 
-#### To-Do List:
-- [x] blabla fait
-- [ ] blabla pas fait
+***To-Do List:
+- [x] 
 - [ ] 
 - [ ] 
 
 ---
 
-## During process notes
+***During process notes***
 
 ---
 
-## End of day Log Entry
+***End of day Log Entry***
 
-### Tasks Completed:
-- [ ] Task 1: [Brief description]
+***Tasks Completed:***
+- [x] Task 0: 
 - [ ] Task 2: [Brief description]
 - [ ] Task 3: [Brief description]
 
-### Progress Summary:
+***Progress Summary:***
 [Provide a brief overview of what was accomplished today]
 
-### Challenges Encountered:
+***Challenges Encountered:***
 - [Challenge 1]
 - [Challenge 2]
 
-### Solutions Implemented:
+***Solutions Implemented:***
 - [Solution for Challenge 1]
 - [Solution for Challenge 2]
 
-### Next Steps:
+***Next Steps:***
 - [ ] [Next task to be worked on]
 - [ ] [Another upcoming task]
 
-### Notes:
+***Notes:***
 [Any additional observations, ideas, or things to remember]
 
 ---------
