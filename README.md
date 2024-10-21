@@ -37,6 +37,7 @@ hbnb/
 │   │       ├── amenities.py
 │   ├── models/
 │   │   ├── __init__.py
+│   │   ├── basemodel.py
 │   │   ├── user.py
 │   │   ├── place.py
 │   │   ├── review.py
@@ -82,6 +83,8 @@ This section outlines the purpose of each directory and file in the project:
     - **models/**: Contains the business logic classes.
     
       - **__init__.py**: Initializes the models package.
+      
+      - **basemodel.py**: Defines the basemodel class from whitch every other class will inherits.
       
       - **user.py**: Defines the user class and its methods.
       
