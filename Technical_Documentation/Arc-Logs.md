@@ -270,6 +270,10 @@ N/A
 ***During process notes***
 I remember that I have my UML I can check for the attributs idea I had before.
 
+I have far too many ideas coming and not enough time. However I try to implement them all and we will see. Added a pseudo-data for checks base
+
+After going back home since, I have to be home for the afternoon, I thought about adding other pseudo database. For check validation and such.
+
 ---
 
 ***End of day Log Entry***
