@@ -11,5 +11,7 @@ email_list = []
 placename_list = []
 
 # Reviews
+review_list = []
 
 # Amenities
+amenities_list = []
