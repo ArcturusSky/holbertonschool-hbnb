@@ -18,10 +18,10 @@ class User(BaseModel):
         # Get attributes from super class (BaseModel)
         super().__init__()
 
-        # Add the ID (from the BaseModel) to ut user id list.
+        # Add the ID (from the BaseModel) to the user id list.
         users_id_list.append(id)
 
-        # Create valid strong passeword as private attribute
+        # Create valid strong password as private attribute
         if not password_validation(password):
             raise ValueError("Password must exceed 5 characters, have an Uppercase and a digit")
         else:
@@ -35,7 +35,7 @@ class User(BaseModel):
         self.last_name = last_name
         self.localisation = localisation
 
-        # Check if usernam is valid
+        # Check if username is valid
         name_lenght_validation50(username)
         username_validation(username)
         self.username = username
@@ -50,7 +50,7 @@ class User(BaseModel):
         if not phone_validation(phone_number):
             raise ValueError("Invalid phone number")
 
-        # Private attribut for admin can be changed only by admin
+        # Private attribute for admin can be changed only by admin
         self.__is_admin__ = is_admin
 
         # Initialize lists to store related objects
@@ -59,7 +59,7 @@ class User(BaseModel):
 
     # Adding data to pseudo-database
     def database_add_user(self, username):
-        """ Add username to the "data"""
+        """ Add username to the PseudoDataBase"""
         username_list.append(username)
 
     # Relationships with others classes and adding datas
