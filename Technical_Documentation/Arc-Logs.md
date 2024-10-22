@@ -8,10 +8,9 @@
     - [Current Task: Task 1 and Task 2](#current-task-task-1-and-task-2)
 - [HBNB Project - Part 2 - BL and API](#hbnb-project---part-2---bl-and-api)
   - [Date: 21/10/2024](#date-21102024)
-    - [Current Task: Everything (implementing business logic)](#current-task-everything-implementing-business-logic)
-- [HBNB Project - Part 2 - BL and API](#hbnb-project---part-2---bl-and-api-1)
+    - [Current Task: Task 0 and task 1](#current-task-task-0-and-task-1)
   - [Date: 22/10/2024](#date-22102024)
-    - [Current Task: Everything (implementing business logic)](#current-task-everything-implementing-business-logic-1)
+    - [Current Task: Task 1 (mainly)](#current-task-task-1-mainly)
 
 
 ## Overview
@@ -176,7 +175,7 @@ I'm exhausted and drained. Time has ran out and I'm over now. I sent at least th
 
 ## Date: 21/10/2024
 
-### Current Task: Everything (implementing business logic)
+### Current Task: Task 0 and task 1
 
 ***Status:***
 - **Task Description:** Creating the full business logic with each entities and relations between them
@@ -233,12 +232,9 @@ I set up what I had to do, understanding overall and created the overall structu
 N/A
 
 ---------
-
-# HBNB Project - Part 2 - BL and API
-
 ## Date: 22/10/2024
 
-### Current Task: Everything (implementing business logic)
+### Current Task: Task 1 (mainly)
 
 ***Status:***
 - **Task Description:** Creating the full business logic with each entities and relations between them
@@ -272,7 +268,9 @@ I remember that I have my UML I can check for the attributs idea I had before.
 
 I have far too many ideas coming and not enough time. However I try to implement them all and we will see. Added a pseudo-data for checks base
 
-After going back home since, I have to be home for the afternoon, I thought about adding other pseudo database. For check validation and such.
+After going back home since, I have to be home for the afternoon, I thought about adding a pseudo database. For check validation and such.
+
+With the pseudodata base I could create several list such as ID list for each class etc. Everything for validations checks
 
 ---
 
