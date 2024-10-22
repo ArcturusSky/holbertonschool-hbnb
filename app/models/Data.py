@@ -9,6 +9,7 @@ email_list = []
 
 # Places
 placename_list = []
+places_adress_list = [] # Tuples inside
 
 # Reviews
 review_list = []
