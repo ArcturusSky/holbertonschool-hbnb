@@ -3,7 +3,7 @@ Module holding all the checks to alleviate others files
 """
 
 import re
-from Data import username_list, placename_list, places_adress_list
+from PseudoDataBase import username_list, placename_list, places_adress_list
 
 # Checks in User's Class
 def name_lenght_validation50(name):
