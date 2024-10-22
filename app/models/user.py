@@ -1,6 +1,6 @@
 from base_model import BaseModel
 from validation_checks import email_validation, name_lenght_validation50, phone_validation, username_validation, password_validation
-from PseudoDataBase import username_list, placename_list, review_list
+from PseudoDataBase import username_list, placename_list, review_list, users_id_list
 
 class User(BaseModel):
     """
@@ -15,8 +15,11 @@ class User(BaseModel):
         Create instance of User.
         """
 
-        # Get attributs from super class (BaseModel) and add user ID to list
+        # Get attributes from super class (BaseModel)
         super().__init__()
+
+        # Add the ID (from the BaseModel) to ut user id list.
+        users_id_list.append(id)
 
         # Create valid strong passeword as private attribute
         if not password_validation(password):
