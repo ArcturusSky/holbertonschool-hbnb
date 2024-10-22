@@ -9,6 +9,9 @@
 - [HBNB Project - Part 2 - BL and API](#hbnb-project---part-2---bl-and-api)
   - [Date: 21/10/2024](#date-21102024)
     - [Current Task: Everything (implementing business logic)](#current-task-everything-implementing-business-logic)
+- [HBNB Project - Part 2 - BL and API](#hbnb-project---part-2---bl-and-api-1)
+  - [Date: 22/10/2024](#date-22102024)
+    - [Current Task: Everything (implementing business logic)](#current-task-everything-implementing-business-logic-1)
 
 
 ## Overview
@@ -185,19 +188,22 @@ I'm exhausted and drained. Time has ran out and I'm over now. I sent at least th
 - **Potential Solutions:** Using AI for helps, supervisors already know about that.
 
 ***Notes***
-- **Ideas:** I will try to be ass logical as possible and work  as fast as possible with AI helps BUT understanding what I'm doing and implementing. Not just bare mindless copy-pasting.
+- **Ideas:** I will try to be as logical as possible and work  as fast as possible with AI helps BUT understanding what I'm doing and implementing. Not just bare mindless copy-pasting.
 - **Questions:**
 - **Reminders:** In the "To-Do List" under that section, I tried to be concise but in the end I'm not sure if it will follow what I have exactly to do. 
 
-***To-Do List:
-- [x] Create the overall structure
-- [ ] Create a Base Model
-- [ ] Create each class (Users, Places, Reviews, Amenities)
-- [ ] Create methods for Users
-- [ ] Create methods for Places
-- [ ] Create methods for Reviews
-- [ ] Create methods for Amenities
-- [ ] Create Relationships between each of them ?
+***To-Do List:***
+- Create the overall structure
+- Create a Base Model
+- Create User's Class
+- Create Place's Class
+- Create Review's Class
+- Create Amenitie's Class
+- Create methods for Users
+- Create methods for Places
+- Create methods for Reviews
+- Create methods for Amenities
+- Create Relationships between each of them ?
 
 ---
 
@@ -208,24 +214,88 @@ I'm exhausted and drained. Time has ran out and I'm over now. I sent at least th
 ***End of day Log Entry***
 
 ***Tasks Completed:***
-- [x] Task 0: Creating the overall structure
-- [ ] Task 2: [Brief description]
-- [ ] Task 3: [Brief description]
+- [x] Create the overall structure
+- [x] Create a Base Model
+
+***Progress Summary:***
+I set up what I had to do, understanding overall and created the overall structure and the Base Model (which will change with adding methods)
+
+***Challenges Encountered:***
+- Having to redo everything from scratch
+
+***Solutions Implemented:***
+- Some little help from A.I (no big code or else, just some help)
+
+***Next Steps:***
+- [ ] Finishing all classes and then method?
+
+***Notes:***
+N/A
+
+---------
+
+# HBNB Project - Part 2 - BL and API
+
+## Date: 22/10/2024
+
+### Current Task: Everything (implementing business logic)
+
+***Status:***
+- **Task Description:** Creating the full business logic with each entities and relations between them
+
+- **Before starting:** I did yesterday the BaseModel Class and started User Class.
+
+***Challenges/Blockers:***
+- **Current Challenges:** Fine for now
+- **Potential Solutions:**
+
+***Notes***
+- **Ideas:** 
+- **Questions:**
+- **Reminders:** In the "To-Do List" under that section, I tried to be concise but in the end I'm not sure if it will follow what I have exactly to do. 
+
+***To-Do List:***
+- Create User's Class
+- Create Place's Class
+- Create Review's Class
+- Create Amenitie's Class
+- Create methods for Users
+- Create methods for Places
+- Create methods for Reviews
+- Create methods for Amenities
+- Create Relationships between each of them ?
+
+---
+
+***During process notes***
+I remember that I have my UML I can check for the attributs idea I had before.
+
+---
+
+***End of day Log Entry***
+
+***Tasks Completed:***
+- [x] Create User's Class
+- [ ] Create Place's Class
+- [ ] Create Review's Class
+- [ ] Create Amenitie's Class
+- [ ] Create methods for Users
+- [ ] Create methods for Places
+- [ ] Create methods for Reviews
+- [ ] Create methods for Amenities
+- [ ] Create Relationships between each of them ?
 
 ***Progress Summary:***
 [Provide a brief overview of what was accomplished today]
 
 ***Challenges Encountered:***
-- [Challenge 1]
-- [Challenge 2]
+- Having to redo everything from scratch
 
 ***Solutions Implemented:***
-- [Solution for Challenge 1]
-- [Solution for Challenge 2]
+- Some little help from A.I (no big code or else, just some help)
 
 ***Next Steps:***
-- [ ] [Next task to be worked on]
-- [ ] [Another upcoming task]
+- [ ] Finishing all classes and then method?
 
 ***Notes:***
 [Any additional observations, ideas, or things to remember]
