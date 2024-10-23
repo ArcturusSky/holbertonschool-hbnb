@@ -11,6 +11,9 @@
     - [Current Task: Task 0 and task 1](#current-task-task-0-and-task-1)
   - [Date: 22/10/2024](#date-22102024)
     - [Current Task: Task 1 (mainly)](#current-task-task-1-mainly)
+  - [Date: 23/10/2024](#date-23102024)
+    - [Current Task: Task 1, maybe starting Task 2?](#current-task-task-1-maybe-starting-task-2)
+
 
 
 ## Overview
@@ -278,7 +281,7 @@ With the pseudodata base I could create several list such as ID list for each cl
 
 ***Tasks Completed:***
 - [x] Create User's Class
-- [ ] Create Place's Class
+- [x] Create Place's Class
 - [ ] Create Review's Class
 - [ ] Create Amenitie's Class
 - [ ] Create methods for Users
@@ -288,16 +291,91 @@ With the pseudodata base I could create several list such as ID list for each cl
 - [ ] Create Relationships between each of them ?
 
 ***Progress Summary:***
-[Provide a brief overview of what was accomplished today]
+I worked quite well, understood everything for now but saw that I will lack of time
 
 ***Challenges Encountered:***
-- Having to redo everything from scratch
+- I won't have enough time
 
 ***Solutions Implemented:***
-- Some little help from A.I (no big code or else, just some help)
+
 
 ***Next Steps:***
-- [ ] Finishing all classes and then method?
+- Finishing the classes and the test classes
+
+***Notes:***
+[Any additional observations, ideas, or things to remember]
+
+---------
+## Date: 23/10/2024
+
+### Current Task: Task 1, maybe starting Task 2?
+
+***Status:***
+- **Task Description:** Creating the full business logic with each entities and relations between them
+
+- **Before starting:** I did yesterday the User Class and Place Class
+
+***Challenges/Blockers:***
+- **Current Challenges:** Fine for now but short on time
+- **Potential Solutions:**
+
+***Notes***
+- **Ideas:** 
+- **Questions:**
+- **Reminders:** This was the "easy" part with only attributes, starting task 2, the real challenge will begin I guess.
+
+***To-Do List:***
+- Create Review's Class
+- Create Amenitie's Class
+- Create test for User's Class
+- Create test for Place's Class
+- Create test for Review's Class
+- Create test for Amennity's Class
+- Update my log
+- Update the Readme.md according to the change (hard part)
+- Create methods for Users
+- Create methods for Places
+- Create methods for Reviews
+- Create methods for Amenities
+
+---
+
+***During process notes:***
+
+While working I realise that I'm swinging a lot between each of my classes, my validation check file and my Pseudo DataBase I think it's a good thing that means that it's modular and I know where everything is, maybe it will helps me to move further for next tasks?
+
+I finished all the classes and also set the pytest for each in a separate folder that will hold every test for the hbnb project.
+
+---
+
+***End of day Log Entry***
+
+***Tasks Completed:***
+- [x] Create Review's Class
+- [x] Create Amenitie's Class
+- [x] Create test for User's Class
+- [x] Create test for Place's Class
+- [x] Create test for Review's Class
+- [x] Create test for Amennity's Class
+- [x] Update my log
+- [ ] Update the Readme.md according to the change (hard part)
+- [ ] Create methods for Users
+- [ ] Create methods for Places
+- [ ] Create methods for Reviews
+- [ ] Create methods for Amenities
+- [ ] Create Relationships between each of them ?
+
+***Progress Summary:***
+
+
+***Challenges Encountered:***
+- I won't have enough time
+
+***Solutions Implemented:***
+
+
+***Next Steps:***
+
 
 ***Notes:***
 [Any additional observations, ideas, or things to remember]
