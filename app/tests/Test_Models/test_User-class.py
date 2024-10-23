@@ -1,4 +1,15 @@
+import pytest
 from app.models.user import User
+from app.models.PseudoDataBase import username_list, users_id_list, email_list, phonenumber_list
+
+# Clearing the data base before each test
+@pytest.fixture(autouse=True)
+def clear_pseudo_database():
+    """Clear pseudo-database before each test."""
+    username_list.clear()
+    users_id_list.clear()
+    email_list.clear()
+    phonenumber_list.clear()
 
 def test_user_creation():
     user = User(
