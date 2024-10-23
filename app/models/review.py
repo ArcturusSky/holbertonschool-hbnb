@@ -14,7 +14,7 @@ class Review(BaseModel):
     """
 
     # Initialisation of the Review class
-    def __init__(self, title, text, rating, placename, user):
+    def __init__(self, title, text, rating, placename, owner):
         """
         Create instance of review.
         """
@@ -42,8 +42,8 @@ class Review(BaseModel):
         self.placename = placename
 
         # Check if user exist
-        owner_validation(user)
-        self.author = user
+        owner_validation(owner)
+        self.owner = owner
 
         # Add data to the PseudoDatabase
         review_list.append(self.title)
