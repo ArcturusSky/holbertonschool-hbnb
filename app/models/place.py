@@ -1,7 +1,7 @@
 from base_model import BaseModel
 # from validation_checks import (for later implementation)
-from PseudoDataBase import places_id_list
-from validation_checks import place_validation, owner_validation, description_validation
+from PseudoDataBase import places_id_list, placename_list, places_adress_list
+from validation_checks import place_validation, owner_validation, description_validation, adress_validation, price_validation
 
 
 class Place(BaseModel):
@@ -18,13 +18,13 @@ class Place(BaseModel):
         # Get attributes from super class (BaseModel)
         super().__init__()
 
-        # Add the ID (from the BaseModel) to the place id list.
+        # Add the ID (from the BaseModel) to the place id list
         places_id_list.append(id)
 
-        # Create tuple variable with latitude and longitude
-        self.adress = (latitude, longitude)
+        # Check if coordinates are valid and create tuple of theses
+        self.adress = adress_validation(latitude, longitude)
 
-        # Check if placename is valid
+        # Check if place doesn't already exist
         place_validation(placename, self.adress)
         self.placename = placename
 
@@ -32,16 +32,24 @@ class Place(BaseModel):
         description_validation(description)
         self.description = description
 
-
+        # Check if price is valid
+        price_validation(price)
         self.price = price
 
         # Check if owner exist
         owner_validation(owner)
         self.owner = owner
 
+        # Getting the ID of the owner
+        """placeholder"""
 
+        self.myownerID = "placeholder"
         self.myreviews = []  # List to store related reviews
         self.myamenities = []  # List to store related amenities
+
+        # Add the place info into the PseudoDataBase
+        placename_list.append(self.placename)
+        places_adress_list.append(self.adress)
 
 
     # Relationships with others classes and adding datas
