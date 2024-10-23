@@ -67,27 +67,19 @@ class User(BaseModel):
         self.myplaces = []
         self.myreviews = []
 
-    # Adding data to pseudo-database
-    def database_add_user(self, username):
-        """
-        Add all users attributes to the PseudoDataBase
-        for relationships with other class and validations
-        """
-
-        users_id_list.append(id)
-        username_list.append(username)
+        # Adding User's data into the pseudo-database
+        users_id_list.append(self.id)
+        username_list.append(self.username)
         email_list.append(self.email)
         phonenumber_list.append(self.phone_number)
 
-    # Relationships with others classes and adding datas to Database
+    # Relationships with others classes
     def add_place(self, place):
         """Add a place to the user."""
-
         self.myplaces.append(place)
-        placename_list.append(place)
+
 
     def add_review(self, review):
         """Add a review to the user."""
 
         self.myreviews.append(review)
-        review_list.append(review)
