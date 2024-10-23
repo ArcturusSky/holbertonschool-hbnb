@@ -59,7 +59,7 @@ class User(BaseModel):
         self.phone_number = phone_number
 
         # Private attribute for admin can be changed only by admin
-        self.__is_admin__ = is_admin
+        self.__is_admin__ = False
 
         # Initialize lists to store related objects belonging to users
         self.myplaces = []
@@ -70,6 +70,21 @@ class User(BaseModel):
         username_list.append(self.username)
         email_list.append(self.email)
         phonenumber_list.append(self.phone_number)
+
+    # Getter for is_admin
+    @property
+    def is_admin(self):
+        """Return is user is admin."""
+        return self.__is_admin__
+
+    # Setter for is_admin
+    @is_admin.setter
+    def is_admin(self, user_requesting):
+        """Allows granting admin privileges only if the requesting user is an admin."""
+        if user_requesting.is_admin:
+            self.__is_admin__ = True
+        else:
+            raise PermissionError("Only administrator can grand admin rank.")
 
     # Relationships with others classes
     def add_place(self, place):
