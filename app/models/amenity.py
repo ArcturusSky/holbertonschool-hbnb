@@ -1,6 +1,6 @@
-from base_model import BaseModel
-from validation_checks import title_validation
-from PseudoDataBase import amenity_id_list
+from .base_model import BaseModel
+from .validation_checks import title_validation
+from .PseudoDataBase import amenity_id_list
 
 class Amenity(BaseModel):
     """

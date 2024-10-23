@@ -1,5 +1,5 @@
-from base_model import BaseModel
-from validation_checks import (
+from .base_model import BaseModel
+from .validation_checks import (
     title_validation,
     description_validation,
     rating_validation,
