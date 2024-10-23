@@ -331,6 +331,7 @@ I worked quite well, understood everything for now but saw that I will lack of t
 - Create test for Place's Class
 - Create test for Review's Class
 - Create test for Amennity's Class
+- Create test with relationships
 - Update my log
 - Update the Readme.md according to the change (hard part)
 - Create methods for Users
@@ -357,6 +358,7 @@ I finished all the classes and also set the pytest for each in a separate folder
 - [x] Create test for Place's Class
 - [x] Create test for Review's Class
 - [x] Create test for Amennity's Class
+- [ ] Create test with relationships
 - [x] Update my log
 - [ ] Update the Readme.md according to the change (hard part)
 - [ ] Create methods for Users
