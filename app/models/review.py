@@ -6,7 +6,7 @@ from .validation_checks import (
     existing_place_validation,
     owner_validation
 )
-from PseudoDataBase import review_id_list, review_list
+from .PseudoDataBase import review_id_list, review_list
 
 class Review(BaseModel):
     """
@@ -39,7 +39,7 @@ class Review(BaseModel):
 
         # Check if place exist
         existing_place_validation(placename)
-        self.place = placename
+        self.placename = placename
 
         # Check if user exist
         owner_validation(user)
