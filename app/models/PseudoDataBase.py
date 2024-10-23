@@ -21,4 +21,4 @@ places_adress_list = [] # Tuples inside
 review_list = []
 
 # Amenities
-amenities_list = []
+amenity_list = []
