@@ -1,6 +1,6 @@
 from .base_model import BaseModel
 from .validation_checks import title_validation
-from .PseudoDataBase import amenity_id_list
+from .PseudoDataBase import amenity_id_list, amenity_list
 
 class Amenity(BaseModel):
     """
@@ -22,3 +22,4 @@ class Amenity(BaseModel):
 
         # Add the ID (from the BaseModel) to the amenity id list.
         amenity_id_list.append(id)
+        amenity_list.append(title)
