@@ -59,22 +59,43 @@ def password_validation(password):
 
 # Checks in Place's Class
 def owner_validation(username):
+    """Check if the owner exist."""
+
     if username not in username_list:
         raise ValueError(f"{username} doesn't exist")
     else:
         return username
 
+def adress_validation(latitude, longitude):
+    """Validate if latitue and longitude are valids."""
+    if not -90 < latitude < 90 or -180 < longitude < 180:
+        raise ValueError("Coordinates are invalids.")
+    else:
+        adress = (latitude, longitude)
+        return adress
+
 def place_validation(placename, adress):
+    """Check if the place doesn't already exist."""
+
     if placename in placename_list and adress in places_adress_list:
         raise ValueError(f"{placename} already exist at {adress}")
     else:
         return placename
 
 def description_validation(description):
+    """Check if the description is existing and not too long."""
+
     if len(description) <= 0 or len(description) > 5000:
         raise ValueError("Description must be between 1 and 5000 characters.")
     else:
         return description
+
+def price_validation(price):
+    """ Check if the price is a positive value"""
+    if price <= 0:
+        raise ValueError("Price must be valid")
+    else:
+        return price
 
 # Checks in Review's Class
 
