@@ -18,3 +18,4 @@ class Review(BaseModel):
 
         # Add the ID (from the BaseModel) to the review id list.
         review_id_list.append(id)
+        review_list.append(review)
