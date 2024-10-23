@@ -68,7 +68,7 @@ def owner_validation(username):
 
 def adress_validation(latitude, longitude):
     """Validate if latitue and longitude are valids."""
-    if not -90 < latitude < 90 or -180 < longitude < 180:
+    if not -90 < latitude < 90 or not -180 < longitude < 180:
         raise ValueError("Coordinates are invalids.")
     else:
         adress = (latitude, longitude)
