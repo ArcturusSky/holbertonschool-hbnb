@@ -99,4 +99,33 @@ def price_validation(price):
 
 # Checks in Review's Class
 
+def title_validation(title):
+    """Check if title is valid"""
+
+    if 50 < len(title) < 0:
+        raise ValueError("Title must be between 1 and 50 characters")
+    else:
+        return title
+
+    # Check if text is valid (used description validation)
+
+def rating_validation(rating):
+    """Check if rating is valid"""
+
+    if 5 < rating < 0:
+        raise ValueError("Rating must be between 1 and 5")
+    else:
+        return rating
+
+def existing_place_validation(placename):
+    """Check if place exist"""
+
+    if placename not in placename_list:
+        raise ValueError("Place doesn't exist")
+    else:
+        return placename
+
+    # Check if user exist (used owner validation)
+
+
 # Checks in Amenity's Class
