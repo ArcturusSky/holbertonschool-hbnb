@@ -1,7 +1,13 @@
 from base_model import BaseModel
 # from validation_checks import (for later implementation)
 from PseudoDataBase import places_id_list, placename_list, places_adress_list
-from validation_checks import place_validation, owner_validation, description_validation, adress_validation, price_validation
+from validation_checks import (
+    place_validation,
+    owner_validation,
+    description_validation,
+    adress_validation,
+    price_validation
+)
 
 
 class Place(BaseModel):
