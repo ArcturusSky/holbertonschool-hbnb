@@ -1,16 +1,14 @@
-from base_model import BaseModel
+from .base_model import BaseModel
 
-from validation_checks import (
+from .validation_checks import (
     email_validation,
     name_lenght_validation50,
     phone_validation, username_validation,
     password_validation
 )
 
-from PseudoDataBase import (
+from .PseudoDataBase import (
     username_list,
-    placename_list,
-    review_list,
     users_id_list,
     email_list,
     phonenumber_list,
