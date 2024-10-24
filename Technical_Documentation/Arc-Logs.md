@@ -13,6 +13,8 @@
     - [Current Task: Task 1 (mainly)](#current-task-task-1-mainly)
   - [Date: 23/10/2024](#date-23102024)
     - [Current Task: Task 1, maybe starting Task 2?](#current-task-task-1-maybe-starting-task-2)
+  - [Date: 24/10/2024](#date-24102024)
+    - [Current Task: End tassk 1 and start task 2](#current-task-end-tassk-1-and-start-task-2)
 
 
 
@@ -369,6 +371,65 @@ I finished all the classes and also set the pytest for each in a separate folder
 
 ***Progress Summary:***
 I kinda finish all the task 1 now, just need to update my Readme.md according to the change I did and files I added. I will try to be concise about that because I really don't have much time. There are 6 tasks to do (even if the last one is made of tests that I do along the way for now.)
+
+***Challenges Encountered:***
+- I won't have enough time
+
+***Solutions Implemented:***
+
+
+***Next Steps:***
+
+
+***Notes:***
+[Any additional observations, ideas, or things to remember]
+
+---------
+## Date: 24/10/2024
+
+### Current Task: End tassk 1 and start task 2
+
+***Status:***
+- **Task Description:** Creating the full business logic with each entities and relations between them
+
+- **Before starting:** I did yesterday all the classes and done all the tests
+
+***Challenges/Blockers:***
+- **Current Challenges:** Fine for now but short on time (again)
+- **Potential Solutions:**
+
+***Notes***
+- **Ideas:** 
+- **Questions:**
+- **Reminders:** 
+
+***To-Do List:***
+- Update my log
+- Update the Readme.md according to the change
+- Create methods for Users
+- Create methods for Places
+- Create methods for Reviews
+- Create methods for Amenities
+
+---
+
+***During process notes:***
+
+---
+
+***End of day Log Entry***
+
+***Tasks Completed:***
+- [x] Update my log
+- [x] Update the Readme.md according to the change (hard part)
+- [ ] Create methods for Users
+- [ ] Create methods for Places
+- [ ] Create methods for Reviews
+- [ ] Create methods for Amenities
+- [ ] Create Relationships between each of them ?
+
+***Progress Summary:***
+
 
 ***Challenges Encountered:***
 - I won't have enough time
