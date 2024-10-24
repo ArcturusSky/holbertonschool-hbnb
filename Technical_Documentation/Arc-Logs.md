@@ -358,7 +358,7 @@ I finished all the classes and also set the pytest for each in a separate folder
 - [x] Create test for Place's Class
 - [x] Create test for Review's Class
 - [x] Create test for Amennity's Class
-- [ ] Create test with relationships
+- [x] Create test with relationships
 - [x] Update my log
 - [ ] Update the Readme.md according to the change (hard part)
 - [ ] Create methods for Users
@@ -368,7 +368,7 @@ I finished all the classes and also set the pytest for each in a separate folder
 - [ ] Create Relationships between each of them ?
 
 ***Progress Summary:***
-
+I kinda finish all the task 1 now, just need to update my Readme.md according to the change I did and files I added. I will try to be concise about that because I really don't have much time. There are 6 tasks to do (even if the last one is made of tests that I do along the way for now.)
 
 ***Challenges Encountered:***
 - I won't have enough time
