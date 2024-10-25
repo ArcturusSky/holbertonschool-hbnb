@@ -2,7 +2,7 @@ from .base_model import BaseModel
 
 from .validation_checks import (
     email_validation,
-    name_lenght_validation50,
+    name_length_validation50,
     phone_validation, username_validation,
     password_validation
 )
@@ -37,16 +37,16 @@ class User(BaseModel):
         password_validation(password)
         self.__password__ = password
 
-        # Check correct first and last name lenghts and localisation
-        name_lenght_validation50(first_name)
-        name_lenght_validation50(last_name)
-        name_lenght_validation50(localisation)
+        # Check correct first and last name lengths and localisation
+        name_length_validation50(first_name)
+        name_length_validation50(last_name)
+        name_length_validation50(localisation)
         self.first_name = first_name
         self.last_name = last_name
         self.localisation = localisation
 
         # Check if username is valid and add to data list
-        name_lenght_validation50(username)
+        name_length_validation50(username)
         username_validation(username)
         self.username = username
 
