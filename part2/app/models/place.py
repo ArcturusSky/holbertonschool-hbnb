@@ -3,10 +3,10 @@ from .base_model import BaseModel
 from .PseudoDataBase import places_id_list, placename_list, places_adress_list
 from .validation_checks import (
     place_validation,
-    owner_validation,
     description_validation,
     adress_validation,
-    price_validation
+    price_validation,
+    given_owner_validation
 )
 
 
@@ -42,8 +42,8 @@ class Place(BaseModel):
         price_validation(price)
         self.price = price
 
-        # Check if owner exist
-        owner_validation(owner)
+        # Check if owner exist is in the FACADE
+        given_owner_validation(owner)
         self.owner = owner
 
         # Getting the ID of the owner
