@@ -6,11 +6,11 @@ import re
 from .PseudoDataBase import username_list, placename_list, places_adress_list
 
 # Checks in User's Class
-def name_lenght_validation50(name):
+def name_length_validation50(name):
     """Check if name has a valid length (1 to 50 characters)."""
 
     if len(name) > 50 or len(name) <= 0:
-        raise ValueError(f"{name}'s lenght is invalid. Must be between 1 and 50 characters.")
+        raise ValueError(f"{name}'s length is invalid. Must be between 1 and 50 characters.")
     else:
         return name
 
