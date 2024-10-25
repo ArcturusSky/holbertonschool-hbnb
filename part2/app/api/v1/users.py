@@ -3,6 +3,7 @@ from app.services.facade import HBnBFacade
 
 # Define the namespace (aka the "box" holding all the routes of user here)
 user_api = Namespace('users', description='User operations')
+
 facade = HBnBFacade()
 # Define the user model for input validation and documentation in the given namespace
 user_model = user_api.model('User', {
@@ -10,7 +11,7 @@ user_model = user_api.model('User', {
     'last_name': fields.String(required=True, description='Last name of the user'),
     'username': fields.String(required=True, description='Username of the user'),
     'password': fields.String(required=True, description='Password of the user'),
-    'email': fields.String(required=True, description='Email of the user'),
+    'email': fields.String(required=True, description='Email of the user'), # Will have to be hashed at some point
     'localisation': fields.String(required=False, description='Location of the user'),
     'phone_number': fields.String(required=True, description='Phone number of the user'),
     'is_admin': fields.Boolean(required=False, description='Admin status of the user', default=False)
@@ -41,9 +42,9 @@ class UserList(Resource):
         user_data = user_api.payload
 
         # Check if email is already in use
-        existing_user = facade.get_user_by_email(user_data['email'])
-        if existing_user:
-            return {'error': 'Email already registered'}, 400
+        existing_user_email = facade.get_user_by_attribute(email=user_data['email'])
+        if existing_user_email:
+            return {'error': 'Email already taken'}, 400
         # Check if username is already in use
         existing_user_username = facade.get_user_by_attribute(username=user_data['username'])
         if existing_user_username:
