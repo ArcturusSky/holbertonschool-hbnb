@@ -1,3 +1,6 @@
+# Test spécifique de mettre les méthides de get à part, ça n'a pas fonctionné
+part2/app/services/methods_get_by_id.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
