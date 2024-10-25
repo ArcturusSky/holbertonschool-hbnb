@@ -56,15 +56,9 @@ def password_validation(password):
     else:
         return password
 
-
 # Checks in Place's Class
-def owner_validation(owner):
-    """Check if the owner exist."""
 
-    if owner.username not in username_list:
-        raise ValueError(f"{owner.username} doesn't exist")
-    else:
-        return owner
+    # Check user by ID is in facade
 
 def adress_validation(latitude, longitude):
     """Validate if latitue and longitude are valids."""
@@ -96,6 +90,13 @@ def price_validation(price):
         raise ValueError("Price must be valid")
     else:
         return price
+
+def given_owner_validation(owner):
+    """ Just Check if an owner is given in parameters"""
+    if owner is None:
+        raise ValueError("Must have an owner")
+    else:
+        return owner
 
 # Checks in Review's Class
 def title_validation(title):
