@@ -4,7 +4,7 @@ from .validation_checks import (
     description_validation,
     rating_validation,
     existing_place_validation,
-    owner_validation
+    given_owner_validation
 )
 from .PseudoDataBase import review_id_list, review_list
 
@@ -41,8 +41,8 @@ class Review(BaseModel):
         existing_place_validation(placename)
         self.placename = placename
 
-        # Check if user exist
-        owner_validation(owner)
+        # Check if user (by user id) exist
+        given_owner_validation
         self.owner = owner
 
         # Add data to the PseudoDatabase
