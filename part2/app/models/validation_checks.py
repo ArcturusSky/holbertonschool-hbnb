@@ -50,7 +50,7 @@ def phone_validation(phone_number):
 def password_validation(password):
     """Validate if password is strong enough using a regex."""
 
-    password_regex = r'^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9_.+-]{6,}$'
+    password_regex = r'^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9_.+-]{12,}$'
     if not re.match(password_regex, password):
         raise ValueError("Password must be at least 6 characters long, contain at least one uppercase letter and one digit.")
     else:
