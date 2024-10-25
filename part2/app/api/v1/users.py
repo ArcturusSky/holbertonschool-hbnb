@@ -10,8 +10,8 @@ user_model = user_api.model('User', {
     'first_name': fields.String(required=True, description='First name of the user'),
     'last_name': fields.String(required=True, description='Last name of the user'),
     'username': fields.String(required=True, description='Username of the user'),
-    'password': fields.String(required=True, description='Password of the user'),
-    'email': fields.String(required=True, description='Email of the user'), # Will have to be hashed at some point
+    'password': fields.String(required=True, description='Password of the user'),# Will have to be hashed at some point
+    'email': fields.String(required=True, description='Email of the user'),
     'localisation': fields.String(required=False, description='Location of the user'),
     'phone_number': fields.String(required=True, description='Phone number of the user'),
     'is_admin': fields.Boolean(required=False, description='Admin status of the user', default=False)
