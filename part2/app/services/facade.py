@@ -72,16 +72,20 @@ class HBnBFacade:
             user: The User instance corresponding to the provided ID, or None if not found.
         """
         return self.user_repo.get(user_id)
-
-    def get_user_by_email(self, email):
+    
+    def get_user_by_attribute(self, **kwargs):
         """
-        Retrieve a user from the repository by their email address.
+        Retrieve a user from the repository by their specified attribute.
         Args:
-            email (str): The email address of the user to retrieve.
+            **kwargs: Attributes to search for, e.g., email or username.
         Returns:
-            User: The User instance corresponding to the provided email, or None if not found.
+            User: The User instance corresponding to the provided attribute, or None if not found.
         """
-        return self.user_repo.get_by_attribute('email', email)
+        # Extract the attribute and its value
+        attribute, value = next(iter(kwargs.items()))
+        
+        # Use the attribute and value to query the user repository
+        return self.user_repo.get_by_attribute(attribute, value)
 
 # /////     PLACE PART     ///// #
 
@@ -122,6 +126,20 @@ class HBnBFacade:
             """
             return self.place_repo.get(place_id)
 
+    def get_place_by_attribute(self, **kwargs):
+        """
+        Retrieve a place from the repository by their specified attribute.
+        Args:
+            **kwargs: Attributes to search for
+        Returns:
+            User: The Place instance corresponding to the provided attribute, or None if not found.
+        """
+        # Extract the attribute and its value
+        attribute, value = next(iter(kwargs.items()))
+        
+        # Use the attribute and value to query the user repository
+        return self.place_repo.get_by_attribute(attribute, value)
+
 # /////     REVIEW PART     ///// #
 
     def create_review(self, review_data):
@@ -159,9 +177,23 @@ class HBnBFacade:
         Args:
             review_id (str): The ID of the review to retrieve.
         Returns:
-            user: The User instance corresponding to the provided ID, or None if not found.
+            user: The Review instance corresponding to the provided ID, or None if not found.
         """
         return self.review_repo.get(review_id)
+
+    def get_review_by_attribute(self, **kwargs):
+        """
+        Retrieve a review from the repository by their specified attribute.
+        Args:
+            **kwargs: Attributes to search for
+        Returns:
+            User: The Review instance corresponding to the provided attribute, or None if not found.
+        """
+        # Extract the attribute and its value
+        attribute, value = next(iter(kwargs.items()))
+        
+        # Use the attribute and value to query the user repository
+        return self.review_repo.get_by_attribute(attribute, value)
 
 # /////     AMENITY PART     ///// #
 
@@ -190,6 +222,20 @@ class HBnBFacade:
         Args:
             amenity_id (str): The ID of the amenity to retrieve.
         Returns:
-            user: The User instance corresponding to the provided ID, or None if not found.
+            user: The Amenity instance corresponding to the provided ID, or None if not found.
         """
         return self.amenity_repo.get(amenity_id)
+
+    def get_amenity_by_attribute(self, **kwargs):
+        """
+        Retrieve a amenity from the repository by their specified attribute.
+        Args:
+            **kwargs: Attributes to search for
+        Returns:
+            User: The Amenity instance corresponding to the provided attribute, or None if not found.
+        """
+        # Extract the attribute and its value
+        attribute, value = next(iter(kwargs.items()))
+        
+        # Use the attribute and value to query the user repository
+        return self.amenity_repo.get_by_attribute(attribute, value)
