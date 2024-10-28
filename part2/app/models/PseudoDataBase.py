@@ -9,6 +9,7 @@ review_id_list = []
 amenity_id_list = []
 
 # Users
+all_users = []  # Hols all users data 
 username_list = []
 phonenumber_list = []
 email_list = []
