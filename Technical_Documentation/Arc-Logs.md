@@ -15,6 +15,10 @@
     - [Current Task: Task 1, maybe starting Task 2?](#current-task-task-1-maybe-starting-task-2)
   - [Date: 24/10/2024](#date-24102024)
     - [Current Task: End tassk 1 and start task 2](#current-task-end-tassk-1-and-start-task-2)
+  - [Date: 25/10/2024](#date-25102024)
+    - [Current Task: Task 2 - Development of API Endpoints and Logic](#current-task-task-2---development-of-api-endpoints-and-logic)
+  - [Date: 28/10/2024](#date-28102024)
+    - [Current Task: Continue Development of API Endpoints and Business Logic](#current-task-continue-development-of-api-endpoints-and-business-logic)
 
 
 
@@ -433,6 +437,132 @@ I kinda finish all the task 1 now, just need to update my Readme.md according to
 
 ***Challenges Encountered:***
 - I won't have enough time
+
+***Solutions Implemented:***
+
+
+***Next Steps:***
+
+
+***Notes:***
+[Any additional observations, ideas, or things to remember]
+
+---------
+
+## Date: 25/10/2024
+
+### Current Task: Task 2 - Development of API Endpoints and Logic
+
+***Status:***
+- **Task Description:** Developing the API endpoints for `Users`, `Places`, `Reviews`, and `Amenities`, including business logic and relationships between entities.
+- **Before starting:** Completed user classes and initial testing for user registration and validation on previous day.
+
+***Challenges/Blockers:***
+- **Current Challenges:** Short on time, particularly for implementing and testing all endpoints. Ensuring unique constraints (like emails and usernames) across different methods efficiently.
+- **Potential Solutions:** Prioritize core endpoints for `Users` (registration, validation), complete `get_user_by_attribute` method, and add endpoint testing for each resource before expanding relationships.
+
+***Notes***
+- **Ideas:** Refactor validation functions for flexibility, allowing easy adaptation across multiple resources. Consider structuring endpoint responses to streamline error handling.
+- **Questions:** How to manage overlapping resource validation and make it consistent across `Places` and `Reviews`?
+- **Reminders:** Document each endpoint’s expected response format and error codes in `README` and ensure proper Swagger documentation with `@api.response`.
+
+***To-Do List:***
+- Complete methods and validation for `Users`.
+- Set up and test endpoints for `Users`.
+- Repeat above steps for `Places`.
+- Repeat above steps for `Reviews`.
+- Repeat above steps for `Amenities`.
+- Add tests for endpoint responses and error handling.
+
+---
+
+***During process notes:***
+- Reviewed and streamlined the `get_user_by_attribute` function for flexible attribute checking in `facade`.
+- Began documenting and organizing namespaces for each resource, adding comments for clarity on imports and API structure.
+
+---
+
+***End of day Log Entry***
+
+***Tasks Completed:***
+- [x] Refactored `get_user_by_attribute` to improve flexibility.
+- [x] Created initial endpoints and validation for `Users` (basic structure).
+- [x] Added initial Swagger documentation for `Users` endpoints.
+- [ ] Create methods and validation for `Places`.
+- [ ] Create endpoints and validation for `Places`.
+- [ ] Create methods and validation for `Reviews`.
+- [ ] Create endpoints and validation for `Reviews`.
+- [ ] Create methods and validation for `Amenities`.
+- [ ] Create endpoints and validation for `Amenities`.
+
+***Progress Summary:***
+Completed initial setup and testing for `Users` resource, including `get_user_by_attribute` method for flexible lookups by email or username. Partial endpoint creation and validation checks completed.
+
+***Challenges Encountered:***
+- Lack of time to fully implement all resource endpoints.
+- Complexities in organizing validation across multiple resources efficiently.
+
+***Solutions Implemented:***
+- Created reusable validation logic to streamline attribute checks.
+- Organized namespaces for resources, making them modular and scalable for future changes.
+
+***Next Steps:***
+- Finalize and test endpoints for `Users`.
+- Expand similar logic to `Places`, `Reviews`, and `Amenities`.
+- Improve Swagger documentation with clear, user-friendly descriptions for each endpoint.
+
+***Notes:***
+Consider implementing batch tests for validation and endpoint responses to save time on repetitive checks.
+
+---------
+## Date: 28/10/2024
+
+### Current Task: Continue Development of API Endpoints and Business Logic
+
+***Status:***
+
+- **Task Description:** Continue implementing methods and endpoints for `Users`, `Places`, `Reviews`, and `Amenities`, with special attention to validation and error handling consistency.
+- **Before starting:** Completed initial structure and endpoints for `Users`, tested `get_user_by_attribute`, and partially documented `Users` endpoints in Swagger.
+
+***Challenges/Blockers:***
+- **Current Challenges:** Efficiently managing validation logic across different entity types while keeping endpoints modular and avoiding redundancy.
+- **Potential Solutions:** Explore refactoring validation into a shared utility or base class to streamline checks and error responses.
+
+***Notes***
+- **Ideas:**
+- **Questions:**
+- **Reminders:** Ensure all documentation is updated in `README.md` as methods and endpoint structures evolve.
+
+***To-Do List:***
+- Finalize validation methods for `Users`.
+- Complete endpoint setup for `Places` and `Reviews`.
+- Begin initial method setup for `Amenities`.
+- Document and test `Places` endpoints with Swagger.
+
+---
+
+***During process notes:***
+
+---
+
+***End of day Log Entry***
+
+***Tasks Completed:***
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+
+***Progress Summary:***
+
+
+***Challenges Encountered:***
+  
 
 ***Solutions Implemented:***
 
