@@ -52,7 +52,7 @@ def password_validation(password):
 
     password_regex = r'^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9_.+-]{12,}$'
     if not re.match(password_regex, password):
-        raise ValueError("Password must be at least 6 characters long, contain at least one uppercase letter and one digit.")
+        raise ValueError("Password must be at least 12 characters long, contain at least one uppercase letter and one digit. No exclamation marks.")
     else:
         return password
 
