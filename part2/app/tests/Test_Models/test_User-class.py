@@ -41,7 +41,7 @@ def test_user_creation():
         first_name="John",
         last_name="Doe",
         username="Jojo",
-        password="Jojo1234",
+        password="Jojo12345678910",
         email="john.doe@example.com",
         localisation="Paris",
         phone_number="0102030405"
@@ -51,7 +51,7 @@ def test_user_creation():
     assert user.first_name == "John"
     assert user.last_name == "Doe"
     assert user.username == "Jojo"
-    assert user.__password__ == "Jojo1234"
+    assert user.__password__ == "Jojo12345678910"
     assert user.email == "john.doe@example.com"
     assert user.localisation == "Paris"
     assert user.phone_number == "0102030405"

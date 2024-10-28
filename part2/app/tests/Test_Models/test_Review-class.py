@@ -66,7 +66,7 @@ def test_review_creation():
         first_name="Jane",
         last_name="Doe",
         username="JaneDoe01",
-        password="Test03",
+        password="Jane01020304050607080910",
         email="Jane@example.com",
         localisation="New-York",
         phone_number="0304050607"

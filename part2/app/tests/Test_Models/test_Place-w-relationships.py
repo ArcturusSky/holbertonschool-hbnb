@@ -70,7 +70,7 @@ def test_place_w_relationships_creation():
         first_name="Alice",
         last_name="Smith",
         username="Lili02",
-        password="Test01",
+        password="Lili01020304050607080910",
         email="alice.smith@example.com",
         localisation="Paris",
         phone_number="0203040506"

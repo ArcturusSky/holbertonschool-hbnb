@@ -63,7 +63,7 @@ def test_place_creation():
         first_name="Olivier",
         last_name="Jesaispas",
         username="Oli",
-        password="Test02",
+        password="Olivier01020304050607080910",
         email="Olivier@example.com",
         localisation="Thonon",
         phone_number="0102030405"
