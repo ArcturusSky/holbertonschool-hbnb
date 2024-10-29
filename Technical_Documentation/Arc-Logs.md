@@ -543,32 +543,35 @@ Consider implementing batch tests for validation and endpoint responses to save 
 
 ***During process notes:***
 
+Postman doesn't work well I don't know why but anyway I will keep working on Swagger documentation and CURL.
+
+Still refining User's methods to be able to apply same pattern on others.
+
 ---
 
 ***End of day Log Entry***
 
 ***Tasks Completed:***
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ] Finalize validation methods for `Users`.
+- [ ] Complete endpoint setup for `Places` and `Reviews`.
+- [ ] Begin initial method setup for `Amenities`.
+- [ ] Document and test `Places` endpoints with Swagger.
 
 ***Progress Summary:***
 
+Managed to fix some issue with the methods. The POST is working, GET by ID too, PUT not yet. DELETE isn't asked yet and GET all users doesn't work yet nor the conflict about already existing users since my test doesn't update my PseudoDataBase.
 
 ***Challenges Encountered:***
   
+PUT method to update doesn't work and I don't really know why yet.
 
 ***Solutions Implemented:***
 
+Not yet.
 
 ***Next Steps:***
 
+Fixing the PUT methods and then applying to other Entities.
 
 ***Notes:***
 [Any additional observations, ideas, or things to remember]
