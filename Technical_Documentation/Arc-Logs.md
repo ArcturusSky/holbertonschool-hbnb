@@ -19,6 +19,8 @@
     - [Current Task: Task 2 - Development of API Endpoints and Logic](#current-task-task-2---development-of-api-endpoints-and-logic)
   - [Date: 28/10/2024](#date-28102024)
     - [Current Task: Continue Development of API Endpoints and Business Logic](#current-task-continue-development-of-api-endpoints-and-business-logic)
+  - [Date: 29/10/2024](#date-29102024)
+    - [Current Task: Continue Development of API Endpoints and Business Logic](#current-task-continue-development-of-api-endpoints-and-business-logic-1)
 
 
 
@@ -572,6 +574,61 @@ Not yet.
 ***Next Steps:***
 
 Fixing the PUT methods and then applying to other Entities.
+
+***Notes:***
+[Any additional observations, ideas, or things to remember]
+
+---------
+## Date: 29/10/2024
+
+### Current Task: Continue Development of API Endpoints and Business Logic
+
+***Status:***
+
+- **Task Description:** Continue implementing methods and endpoints for `Users`, `Places`, `Reviews`, and `Amenities`
+- **Before starting:** Completed initial structure and endpoints for `Users`,completed `POST` and `GET` methods. `PUT` and `GET ALL` are set but not working yet (normal for `GET ALL`) 
+
+***Challenges/Blockers:***
+- **Current Challenges:** Managing to work with my pseudodatabase and thinking about because of that some test CAN'T work yet. (example: conflict if already existing user).  Fixing `PUT` that I don't understand why it doesn't work for now.
+- **Potential Solutions:** Asking Kévin?
+
+***Notes***
+- **Ideas:**
+- **Questions:**
+- **Reminders:** Ensure all documentation is updated in `README.md` as methods and endpoint structures evolve.
+
+***To-Do List:***
+- Finalize validation methods for `Users`.
+- Complete endpoint setup for `Places` and `Reviews`.
+- Begin initial method setup for `Amenities`.
+- Document and test `Places` endpoints with Swagger.
+
+---
+
+***During process notes:***
+
+
+---
+
+***End of day Log Entry***
+
+***Tasks Completed:***
+- [ ] Finalize validation methods for `Users`.
+- [ ] Complete endpoint setup for `Places` and `Reviews`.
+- [ ] Begin initial method setup for `Amenities`.
+- [ ] Document and test `Places` endpoints with Swagger.
+
+***Progress Summary:***
+
+
+***Challenges Encountered:***
+
+
+***Solutions Implemented:***
+
+
+***Next Steps:***
+
 
 ***Notes:***
 [Any additional observations, ideas, or things to remember]
