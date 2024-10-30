@@ -1,6 +1,5 @@
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import HBnBFacade
-from flask import jsonify
 
 # Define the namespace for user operations
 user_api = Namespace('users', description='User operations')
