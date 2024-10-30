@@ -16,20 +16,6 @@ from app.models.validation_checks import (
     title_validation,
     rating_validation,
 )
-from app.models.PseudoDataBase import (
-     users_id_list,
-     places_id_list,
-     review_id_list,
-     amenity_id_list,
-     all_users,
-     username_list,
-     phonenumber_list,
-     email_list,
-     placename_list,
-     places_adress_list,
-     review_list,
-     amenity_list
-)
 
 class HBnBFacade(InMemoryRepository):
     """
@@ -47,24 +33,21 @@ class HBnBFacade(InMemoryRepository):
         - amenity_repo: Manages amenity data
         """
         self.user_repo = InMemoryRepository()
-        self.user_repo.add(username_list)
-        self.user_repo.add(all_users)
-        self.user_repo.add(users_id_list)
-        self.user_repo.add(phonenumber_list)
-        self.user_repo.add(email_list)
-
         self.place_repo = InMemoryRepository()
-        self.place_repo.add(placename_list)
-        self.place_repo.add(places_adress_list)
-        self.place_repo.add(places_id_list)
-
         self.review_repo = InMemoryRepository()
-        self.review_repo.add(review_list)
-        self.review_repo.add(review_id_list)
-
         self.amenity_repo = InMemoryRepository()
-        self.amenity_repo.add(amenity_list)
-        self.amenity_repo.add(amenity_id_list)
+
+# /////     TOOL    ///// #
+
+    def clear(self):
+            """
+            Clean all data in repo for testing purpose
+            """
+
+            self.user_repo = {}
+            self.place_repo = {}
+            self.review_repo = {}
+            self.amenity_repo = {}
 
 # /////     USER PART     ///// #
 
@@ -116,6 +99,18 @@ class HBnBFacade(InMemoryRepository):
         # Use the attribute and value to query the user repository
         return self.user_repo.get_by_attribute(attribute, value)
 
+    def get_all_users(self):
+        """
+        Retrieve a user from the repository 
+
+        Args:
+            None.
+
+        Returns:
+            all users?
+        """
+        return self.user_repo.get_all()
+
     def update_user(self, user_id, user_data):
         """
         Update user data by their ID.
@@ -127,14 +122,13 @@ class HBnBFacade(InMemoryRepository):
         Returns:
             dict: A dictionary containing the user's updated details, or None if the user is not found.
         """
-        # Retrieve the user by ID
-        updated_user = self.user_repo.get(user_id)
-        if updated_user:
-            # Update user attributes
-            for key, value in user_data.items():
-                setattr(updated_user, key, value)
-            # Return a dictionary with selected attributes
-            return {
+        # Retrieve the user by ID and update only given attributes
+        updated_user = self.user_repo.update(user_id, user_data)
+        if not updated_user:
+            return None
+
+        # Return explicit user data to avoid returning a boolean
+        return {
             'id': updated_user.id,
             'first_name': updated_user.first_name,
             'last_name': updated_user.last_name,
@@ -142,9 +136,9 @@ class HBnBFacade(InMemoryRepository):
             'email': updated_user.email,
             'localisation': updated_user.localisation,
             'phone_number': updated_user.phone_number,
-            'is_admin': updated_user.is_admin,
-        }, 200
-        return None
+        }
+
+
 
 
 # /////     PLACE PART     ///// #
