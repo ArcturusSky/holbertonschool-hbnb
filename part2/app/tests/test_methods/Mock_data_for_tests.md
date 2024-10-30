@@ -10,13 +10,35 @@ This document is meant to sum up the test and especially to help me to just have
 
 ```bash
 {
-  "first_name": "John",
-  "last_name": "Doe",
-  "username": "Jojo1",
-  "password": "Test0102030405",
-  "email": "Johen.doe@example.com",
-  "localisation": "Paris",
+  "first_name": "Carmilla",
+  "last_name": "Carmine",
+  "username": "BladeOverlord",
+  "password": "AngelicSteel12",
+  "email": "Carmine.C@example.com",
+  "localisation": "Hell",
   "phone_number": "0102030405",
+  "is_admin": false
+}
+
+{
+  "first_name": "Odette",
+  "last_name": "Carmine",
+  "username": "LabDevil",
+  "password": "LittleMamaGirl01",
+  "email": "Carmine.O@example.com",
+  "localisation": "Hell",
+  "phone_number": "0203040506",
+  "is_admin": false
+}
+
+{
+  "first_name": "Clara",
+  "last_name": "Carmine",
+  "username": "ClaraC",
+  "password": "LittleMamaGirl02",
+  "email": "Carmine.Cl@example.com",
+  "localisation": "Hell",
+  "phone_number": "0304050607",
   "is_admin": false
 }
 ```
@@ -51,6 +73,12 @@ curl -X POST http://localhost:5000/api/v1/users/ \
 curl -X GET http://localhost:5000/api/v1/users/given_id \
 -H "Content-Type: application/json"
 ```
+
+### GET (all users)
+
+After putting the 3 Carmines profiles, trying getting all users:
+
+
 
 ### PUT
 
