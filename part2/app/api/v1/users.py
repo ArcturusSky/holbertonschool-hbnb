@@ -1,5 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import HBnBFacade
+from app.models.PseudoDataBase import all_users
+from flask import jsonify
 
 # Define the namespace (aka the "box" holding all the routes of user here)
 user_api = Namespace('users', description='User operations')
@@ -10,10 +12,11 @@ user_model = user_api.model('User', {
     'first_name': fields.String(required=True, description='First name of the user'),
     'last_name': fields.String(required=True, description='Last name of the user'),
     'username': fields.String(required=True, description='Username of the user'),
-    'password': fields.String(required=True, description='Password of the user'),# Will have to be hashed at some point
+    'password': fields.String(required=True, description='Password of the user'),  # Will have to be hashed at some point
     'email': fields.String(required=True, description='Email of the user'),
     'localisation': fields.String(required=False, description='Location of the user'),
     'phone_number': fields.String(required=True, description='Phone number of the user'),
+    'user_id': fields.String(required=False, description='Id of the User'),
     'is_admin': fields.Boolean(required=False, description='Admin status of the user', default=False)
 })
 
@@ -48,23 +51,34 @@ class UserList(Resource):
         # Check if username is already in use
         existing_user_username = facade.get_user_by_attribute(username=user_data['username'])
         if existing_user_username:
-            return {'error': 'Username already taken'}, 400
+            return {'error': 'Username already registered'}, 400
 
-        # Create new user
+        # Create new user and add their data in users global dict
         new_user = facade.create_user(user_data)
-        return new_user
+        all_users.append(new_user)
+        return {
+            'first_name': new_user.first_name,
+            'last_name': new_user.last_name,
+            'username': new_user.username,
+            'email': new_user.email,
+            'localisation': new_user.localisation,
+            'phone_number': new_user.phone_number,
+            'user_id': new_user.id,
+            'is_admin': new_user.is_admin,
+        }, 200
 
 @user_api.route('/<user_id>')
 class UserResource(Resource):
     """Resource for handling operations related to a specific user"""
 
     @user_api.response(200, 'User details retrieved successfully')
+    @user_api.response(400, 'error: Invalid input data')
     @user_api.response(404, 'User not found')
     def get(self, user_id):
         """
         Get user details by user ID.
         
-        This endpoint retrieves the details of a user identified by their unique ID and DISPLAY them in the HTML response.
+        This method retrieves the details of a user identified by their unique ID and DISPLAY them in the HTML response.
         
         Args:
             user_id (str): The unique identifier of the user.
@@ -86,3 +100,39 @@ class UserResource(Resource):
             'phone_number': user.phone_number,
             'is_admin': user.is_admin,
         }, 200
+    
+    def put(self, user_id):
+        """
+        Update user details by user ID.
+        
+        This method allows updating the details of an existing user.
+        
+        Args:
+            user_id (str): The unique identifier of the user.
+        
+        Returns:
+            JSON object containing the updated user's details.
+        """
+        user = facade.get_user_by_id(user_id)
+        if not user:
+            return {'error': 'User not found'}, 404
+
+        user_data = user_api.payload
+        updated_user = facade.update_user(user_id, user_data)
+
+        if not updated_user:
+            return 400
+        return jsonify(updated_user), 200
+
+    
+@user_api.route('/all_users')
+class ShowAllUsers(Resource):
+    """
+    Resource for showing all users.
+    """
+    @user_api.response(200, 'User details retrieved successfully')
+    def get_all_users(self):
+        """
+        Function that returns the entire users dictionary as JSON.
+        """
+        return jsonify(all_users), 200
