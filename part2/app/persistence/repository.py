@@ -127,10 +127,17 @@ class InMemoryRepository(Repository):
         Args:
             obj_id: The ID of the object to update.
             data: A dictionary of updated data for the object.
+
+        Returns:
+            The updated object or None if the object does not exist.
         """
-        obj = self.get(obj_id)
+        obj = self.get(obj_id)  # Retrieve the object by it's ID
         if obj:
-            obj.update(data)
+            # Udpate object with new values
+            for key, value in data.items():
+                setattr(obj, key, value)  # Update each attribute
+            return obj
+        return None
 
     def delete(self, obj_id):
         """
