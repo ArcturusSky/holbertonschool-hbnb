@@ -1,21 +1,21 @@
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import HBnBFacade
-from app.models.PseudoDataBase import all_users
 from flask import jsonify
 
-# Define the namespace (aka the "box" holding all the routes of user here)
+# Define the namespace for user operations
 user_api = Namespace('users', description='User operations')
 
 facade = HBnBFacade()
-# Define the user model for input validation and documentation in the given namespace
+
+# Define the user model for input validation and documentation
 user_model = user_api.model('User', {
     'first_name': fields.String(required=True, description='First name of the user'),
     'last_name': fields.String(required=True, description='Last name of the user'),
     'username': fields.String(required=True, description='Username of the user'),
-    'password': fields.String(required=True, description='Password of the user'),  # Will have to be hashed at some point
+    'password': fields.String(required=True, description='Password of the user'),  # Should be hashed
     'email': fields.String(required=True, description='Email of the user'),
     'localisation': fields.String(required=False, description='Location of the user'),
-    'phone_number': fields.String(required=True, description='Phone number of the user'),
+    'phone_number': fields.String(required=False, description='Phone number of the user'),
     'user_id': fields.String(required=False, description='Id of the User'),
     'is_admin': fields.Boolean(required=False, description='Admin status of the user', default=False)
 })
@@ -26,36 +26,30 @@ class UserList(Resource):
 
     @user_api.expect(user_model, validate=True)
     @user_api.response(201, 'User successfully created')
-    @user_api.response(400, 'Email already registered')
-    @user_api.response(400, 'Username already registered')
+    @user_api.response(409, 'Username or email already registered')
     @user_api.response(400, 'Invalid input data')
-    # `marshal` is used to serialize user_model into JSON format to return it at the end
     @user_api.marshal_list_with(user_model)
     def post(self):
-        """
-        Register a new user.
-        
-        This endpoint allows creating a new user. The request payload must contain
-        'first_name', 'last_name', 'username', 'password', and 'email'. Optional fields include
-        'localisation', 'phone_number', and 'is_admin'.
-        
-        Returns:
-            JSON object containing the new user's details (without password).
-        """
+        """Register a new user."""
         user_data = user_api.payload
 
-        # Check if email is already in use
-        existing_user_email = facade.get_user_by_attribute(email=user_data['email'])
-        if existing_user_email:
-            return {'error': 'Email already taken'}, 400
-        # Check if username is already in use
-        existing_user_username = facade.get_user_by_attribute(username=user_data['username'])
-        if existing_user_username:
-            return {'error': 'Username already registered'}, 400
+        # Validate required fields
+        required_fields = ['first_name', 'last_name', 'username', 'password', 'email']
+        missing_fields = [field for field in required_fields if field not in user_data]
 
-        # Create new user and add their data in users global dict
+        if missing_fields:
+            return {'error': f'Missing fields: {", ".join(missing_fields)}'}, 400
+
+        # Check if username or email already in use
+        if facade.get_user_by_attribute(email=user_data['email']):
+            return {'error': 'Email already registered'}, 409
+        
+        if facade.get_user_by_attribute(username=user_data['username']):
+            return {'error': 'Username already registered'}, 409
+
+        # Create new user
         new_user = facade.create_user(user_data)
-        all_users.append(new_user)
+        
         return {
             'first_name': new_user.first_name,
             'last_name': new_user.last_name,
@@ -65,27 +59,17 @@ class UserList(Resource):
             'phone_number': new_user.phone_number,
             'user_id': new_user.id,
             'is_admin': new_user.is_admin,
-        }, 200
+        }, 201
+
 
 @user_api.route('/<user_id>')
 class UserResource(Resource):
     """Resource for handling operations related to a specific user"""
 
     @user_api.response(200, 'User details retrieved successfully')
-    @user_api.response(400, 'error: Invalid input data')
     @user_api.response(404, 'User not found')
     def get(self, user_id):
-        """
-        Get user details by user ID.
-        
-        This method retrieves the details of a user identified by their unique ID and DISPLAY them in the HTML response.
-        
-        Args:
-            user_id (str): The unique identifier of the user.
-        
-        Returns:
-            JSON object containing the user's details if found, otherwise a 404 error.
-        """
+        """Get user details by user ID."""
         user = facade.get_user_by_id(user_id)
         if not user:
             return {'error': 'User not found'}, 404
@@ -101,38 +85,53 @@ class UserResource(Resource):
             'is_admin': user.is_admin,
         }, 200
     
+    @user_api.expect(user_model, partial=True)
+    @user_api.response(200, 'User successfully updated')
+    @user_api.response(404, 'User not found')
+    @user_api.response(400, 'Invalid input data')
     def put(self, user_id):
-        """
-        Update user details by user ID.
+        """Update user details by user ID."""
         
-        This method allows updating the details of an existing user.
-        
-        Args:
-            user_id (str): The unique identifier of the user.
-        
-        Returns:
-            JSON object containing the updated user's details.
-        """
+        # check if user exist
         user = facade.get_user_by_id(user_id)
         if not user:
             return {'error': 'User not found'}, 404
 
+        # Retrieve payload data
         user_data = user_api.payload
         updated_user = facade.update_user(user_id, user_data)
 
-        if not updated_user:
-            return 400
-        return jsonify(updated_user), 200
+        # Check if update failed
+        if updated_user is None:
+            return {'error': 'Update failed'}, 400
+        
+        return updated_user, 200
 
-    
-@user_api.route('/all_users')
+@user_api.route('/all')
 class ShowAllUsers(Resource):
-    """
-    Resource for showing all users.
-    """
+    """Resource for showing all users."""
+
     @user_api.response(200, 'User details retrieved successfully')
-    def get_all_users(self):
-        """
-        Function that returns the entire users dictionary as JSON.
-        """
-        return jsonify(all_users), 200
+    @user_api.response(404, 'No users found')
+    def get(self):
+        """Retrieve all registered users."""
+        all_users = facade.get_all_users()
+        
+        if not all_users:
+            return {'error': 'No users found'}, 404
+
+        users_data = [
+            {
+                'id': user.id,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'username': user.username,
+                'email': user.email,
+                'localisation': user.localisation,
+                'phone_number': user.phone_number,
+                'is_admin': user.is_admin,
+            }
+            for user in all_users
+        ]
+        
+        return users_data, 200
