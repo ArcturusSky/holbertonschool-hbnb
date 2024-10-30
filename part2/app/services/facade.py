@@ -107,7 +107,7 @@ class HBnBFacade(InMemoryRepository):
             None.
 
         Returns:
-            all users?
+            All users datas
         """
         return self.user_repo.get_all()
 
@@ -137,9 +137,6 @@ class HBnBFacade(InMemoryRepository):
             'localisation': updated_user.localisation,
             'phone_number': updated_user.phone_number,
         }
-
-
-
 
 # /////     PLACE PART     ///// #
 
@@ -193,6 +190,41 @@ class HBnBFacade(InMemoryRepository):
         
         # Use the attribute and value to query the user repository
         return self.place_repo.get_by_attribute(attribute, value)
+
+    def get_all_place(self):
+        """
+        Retrieve all place from the repository 
+
+        Args:
+            None.
+
+        Returns:
+            all places data
+        """
+        return self.place_repo.get_all()
+
+    def update_place(self, place_id, place_data):
+        """
+        Update place data by their ID.
+
+        Args:
+            place_id (str): The unique identifier of the place.
+            place_data (dict): Updated data in dict format.
+
+        Returns:
+            dict: A dictionary containing the place's updated details, or None if the user is not found.
+        """
+        # Retrieve the place by ID and update only given attributes
+        updated_place = self.place_repo.update(place_id, place_data)
+        if not updated_place:
+            return None
+
+        # Return explicit place data to avoid returning a boolean
+        return {
+            'id': updated_place.id,
+            'title': updated_place.title,
+            'text': updated_place.text,
+        }
 
 # /////     REVIEW PART     ///// #
 
@@ -248,6 +280,41 @@ class HBnBFacade(InMemoryRepository):
         
         # Use the attribute and value to query the user repository
         return self.review_repo.get_by_attribute(attribute, value)
+    
+    def get_all_reviews(self):
+        """
+        Retrieve all reviews from the repository 
+
+        Args:
+            None.
+
+        Returns:
+            All reviews datas
+        """
+        return self.review_repo.get_all()
+
+    def update_review(self, review_id, review_data):
+        """
+        Update review data by their ID.
+
+        Args:
+            review_id (str): The unique identifier of the review.
+            review_data (dict): Updated data in dict format.
+
+        Returns:
+            dict: A dictionary containing the review's updated details, or None if the user is not found.
+        """
+        # Retrieve the review by ID and update only given attributes
+        updated_review = self.review_repo.update(review_id, review_data)
+        if not updated_review:
+            return None
+
+        # Return explicit review data to avoid returning a boolean
+        return {
+            'id': updated_review.id,
+            'title': updated_review.title,
+            'text': updated_review.text,
+        }
 
 # /////     AMENITY PART     ///// #
 
@@ -293,3 +360,38 @@ class HBnBFacade(InMemoryRepository):
         
         # Use the attribute and value to query the user repository
         return self.amenity_repo.get_by_attribute(attribute, value)
+    
+    def get_all_amenities(self):
+        """
+        Retrieve all amenities from the repository 
+
+        Args:
+            None.
+
+        Returns:
+            All amenities datas
+        """
+        return self.amenity_repo.get_all()
+
+    def update_amenity(self, amenity_id, amenity_data):
+        """
+        Update amenity data by their ID.
+
+        Args:
+            amenity_id (str): The unique identifier of the amenity.
+            amenity_data (dict): Updated data in dict format.
+
+        Returns:
+            dict: A dictionary containing the amenity's updated details, or None if the user is not found.
+        """
+        # Retrieve the amenity by ID and update only given attributes
+        updated_amenity = self.amenity_repo.update(amenity_id, amenity_data)
+        if not updated_amenity:
+            return None
+
+        # Return explicit amenity data to avoid returning a boolean
+        return {
+            'id': updated_amenity.id,
+            'title': updated_amenity.title,
+            'text': updated_amenity.text,
+        }
