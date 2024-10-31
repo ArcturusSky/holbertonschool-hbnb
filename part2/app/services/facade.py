@@ -392,6 +392,5 @@ class HBnBFacade(InMemoryRepository):
         # Return explicit amenity data to avoid returning a boolean
         return {
             'id': updated_amenity.id,
-            'title': updated_amenity.title,
-            'text': updated_amenity.text,
+            'title': updated_amenity.title
         }
