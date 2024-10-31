@@ -31,7 +31,7 @@ class AmenityList(Resource):
 
         return {
             'title': new_amenity.title,
-            'amenity_id': new_amenity.id  # Correction de 'aminity_id' à 'amenity_id'
+            'amenity_id': new_amenity.id
         }, 201
 
 
