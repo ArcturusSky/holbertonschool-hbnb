@@ -82,4 +82,19 @@ After putting the 3 Carmines profiles, trying getting all users:
 
 ### PUT
 
+## Places Methods
+
+```bash
+{
+  "title": "The Tower",
+  "description": "The Tower of Carmilla Carmines, OverLord",
+  "price": 15000,
+  "latitude": -90,
+  "longitude": -180,
+  "owner_id": "e6b9e3de-8f22-4e64-8a6f-2079c7ec5090",
+  "amenities": [
+    "wifi", "angelic weapons"
+  ]
+}
+```
 ...
