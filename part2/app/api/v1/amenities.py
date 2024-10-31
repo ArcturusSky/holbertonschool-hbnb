@@ -1,43 +1,94 @@
 from flask_restx import Namespace, Resource, fields
-from app.services import facade
+from app.services.facade import HBnBFacade
 
-api = Namespace('amenities', description='Amenity operations')
+# Define the namespace for amenities operations
+amenity_api = Namespace('amenities', description='Amenity operations')
+
+facade = HBnBFacade()
 
 # Define the amenity model for input validation and documentation
-amenity_model = api.model('Amenity', {
-    'name': fields.String(required=True, description='Name of the amenity')
+amenity_model = amenity_api.model('Amenity', {
+    'title': fields.String(required=True, title='Name of the amenity')
 })
 
-@api.route('/')
+@amenity_api.route('/')
 class AmenityList(Resource):
-    @api.expect(amenity_model)
-    @api.response(201, 'Amenity successfully created')
-    @api.response(400, 'Invalid input data')
+    @amenity_api.expect(amenity_model)
+    @amenity_api.response(201, 'Amenity successfully created')
+    @amenity_api.response(400, 'Invalid input data')
     def post(self):
         """Register a new amenity"""
-        # Placeholder for the logic to register a new amenity
-        pass
 
-    @api.response(200, 'List of amenities retrieved successfully')
+        amenity_data = amenity_api.payload
+
+        # Validate required fields
+        required_field = ['title']
+        if any(field not in amenity_data for field in required_field):
+            return {'error': f'Missing fields: {", ".join(required_field)}'}, 400
+
+        # Create new amenity
+        new_amenity = facade.create_amenity(amenity_data)
+
+        return {
+            'title': new_amenity.title,
+            'amenity_id': new_amenity.id  # Correction de 'aminity_id' à 'amenity_id'
+        }, 201
+
+
+@amenity_api.route('/all_amenities')
+class ShowAllAmenities(Resource):
+    @amenity_api.response(200, 'List of amenities retrieved successfully')
+    @amenity_api.response(404, 'Amenities not found')
     def get(self):
         """Retrieve a list of all amenities"""
-        # Placeholder for logic to return a list of all amenities
-        pass
+        
+        all_amenities = facade.get_all_amenities()
+        
+        if not all_amenities:
+            return {'error': 'No amenity found'}, 404
 
-@api.route('/<amenity_id>')
+        amenities_data = [
+            {
+                'id': amenity.id,
+                'title': amenity.title,
+            }
+            for amenity in all_amenities
+        ]
+        return amenities_data, 200
+
+@amenity_api.route('/<amenity_id>')
 class AmenityResource(Resource):
-    @api.response(200, 'Amenity details retrieved successfully')
-    @api.response(404, 'Amenity not found')
+    @amenity_api.response(200, 'Amenity details retrieved successfully')
+    @amenity_api.response(404, 'Amenity not found')
     def get(self, amenity_id):
         """Get amenity details by ID"""
-        # Placeholder for the logic to retrieve an amenity by ID
-        pass
+        amenity = facade.get_amenity_by_id(amenity_id)
+        if not amenity:
+            return {'error': 'amenity not found'}, 404
 
-    @api.expect(amenity_model)
-    @api.response(200, 'Amenity updated successfully')
-    @api.response(404, 'Amenity not found')
-    @api.response(400, 'Invalid input data')
+        return {
+            'id': amenity.id,
+            'title': amenity.title,
+        }, 200
+
+    @amenity_api.expect(amenity_model)
+    @amenity_api.response(200, 'Amenity updated successfully')
+    @amenity_api.response(404, 'Amenity not found')
+    @amenity_api.response(400, 'Invalid input data')
     def put(self, amenity_id):
         """Update an amenity's information"""
-        # Placeholder for the logic to update an amenity by ID
-        pass
+        
+        # check if amenity exist
+        amenity = facade.get_amenity_by_id(amenity_id)
+        if not amenity:
+            return {'error': 'amenity not found'}, 404
+
+        # Retrieve payload data
+        amenity_data = amenity_api.payload
+        updated_amenity = facade.update_amenity(amenity_id, amenity_data)
+
+        # Check if update failed
+        if updated_amenity is None:
+            return {'error': 'Update failed'}, 400
+        
+        return updated_amenity, 200    
