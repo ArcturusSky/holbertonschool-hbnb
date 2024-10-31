@@ -141,31 +141,32 @@ class HBnBFacade(InMemoryRepository):
 # /////     PLACE PART     ///// #
 
     def create_place(self, place_data):
-            """
-            Create and add a new place to the place repository.
-            Args:
-                place_data (dict): A dictionary containing place attributes (placename, descriptions, price, etc.).
-            Returns:
-                place: The created place instance.
-            """
+        """Create a new place with the given data"""
+        # Check if owner exist
+        owner = self.get_user_by_id(place_data['owner_id'])
+        if not owner:
+            return None
 
-            # Try all the validations from validations checks
-            try:
-                name_length_validation50(place_data['placename'])
-                adress_validation(place_data['latitude'], place_data['longitude']) 
-                place_validation(place_data['placename'], place_data['address'])
-                description_validation(place_data['description'])
-                price_validation(place_data['price'])
-                
-                # Check if owner exist by its ID
-                if not self.user_repo.get(place_data['owner']):
-                    raise ValueError("Owner does not exist.")
-            except ValueError as e:
-                return {"error": str(e)}, 400 
+        # Create new instance of place associating the owner
+        new_place = Place(
+            title = place_data['title'],
+            description = place_data.get('description', ''),
+            price = place_data['price'],
+            latitude = place_data['latitude'],
+            longitude = place_data['longitude'],
+            owner = owner  # Associate the owner found in the previous check
+        )
 
-            place = Place(**place_data)
-            self.place_repo.add(place)
-            return place
+        # Managed amenities if provided
+        if 'amenities' in place_data:
+            amenities = [self.get_amenity_by_id(aid) for aid in place_data['amenities']]
+            new_place.amenities = [amenity for amenity in amenities if amenity]
+
+        self.place_repo.add(new_place)
+
+        return new_place
+
+
 
     def get_place_by_id(self, place_id):
             """
@@ -229,92 +230,101 @@ class HBnBFacade(InMemoryRepository):
 # /////     REVIEW PART     ///// #
 
     def create_review(self, review_data):
-            """
-            Create and add a new review to the review repository.
-            Args:
-                review_data (dict): A dictionary containing review attributes (title, text, rating, placename, owner.).
-            Returns:
-                review: The created review instance.
-            """
-
-            # Try all the validations from validations checks
-            try:
-                name_length_validation50(review_data['title'])
-                description_validation(review_data['text'])
-                rating_validation(review_data['rating'])
-
-                # Check if place exist by its ID
-                if not self.place_repo.get(review_data['place']):
-                    raise ValueError("Place does not exist.")
-                
-                # Check if owner exist by its ID
-                if not self.user_repo.get(review_data['owner']):
-                    raise ValueError("Owner does not exist.")
-            except ValueError as e:
-                return {"error": str(e)}, 400 
-            
-            review = Review(**review_data)
-            self.review_repo.add(review)
-            return review
-    
-    def get_review_by_id(self, review_id):
         """
-        Retrieve a review from the repository by their ID.
+        Creates a review with the provided data, validating required associations.
+
         Args:
-            review_id (str): The ID of the review to retrieve.
+            review_data (dict): Contains 'text', 'rating', 'user_id', 'place_id'.
+        
         Returns:
-            user: The Review instance corresponding to the provided ID, or None if not found.
+            Review: The created review instance.
+        
+        Raises:
+            ValueError: If any required field is missing or invalid.
+        """
+        # Validate required fields
+        required_fields = ['text', 'rating', 'user_id', 'place_id']
+        for field in required_fields:
+            if field not in review_data:
+                raise ValueError(f"{field} is required.")
+
+        # Validate user and place existence
+        user = self.user_repo.get(review_data['user_id'])
+        place = self.place_repo.get(review_data['place_id'])
+        if not user:
+            raise ValueError("User not found.")
+        if not place:
+            raise ValueError("Place not found.")
+        
+        # Create the review
+        review = self.review_repo.add(review_data)
+        return review
+
+    def get_review(self, review_id):
+        """
+        Retrieve a review by its ID.
+        
+        Args:
+            review_id (str): The review's identifier.
+        
+        Returns:
+            Review: The corresponding review or None if not found.
         """
         return self.review_repo.get(review_id)
 
-    def get_review_by_attribute(self, **kwargs):
-        """
-        Retrieve a review from the repository by their specified attribute.
-        Args:
-            **kwargs: Attributes to search for
-        Returns:
-            User: The Review instance corresponding to the provided attribute, or None if not found.
-        """
-        # Extract the attribute and its value
-        attribute, value = next(iter(kwargs.items()))
-        
-        # Use the attribute and value to query the user repository
-        return self.review_repo.get_by_attribute(attribute, value)
-    
     def get_all_reviews(self):
         """
-        Retrieve all reviews from the repository 
-
-        Args:
-            None.
-
+        Retrieve all reviews.
+        
         Returns:
-            All reviews datas
+            list[Review]: List of all reviews.
         """
         return self.review_repo.get_all()
 
+    def get_reviews_by_place(self, place_id):
+        """
+        Retrieve all reviews associated with a specific place.
+        
+        Args:
+            place_id (str): The identifier of the place.
+        
+        Returns:
+            list[Review]: List of reviews for the specified place.
+        """
+        return [review for review in self.review_repo.get_all() if review['place_id'] == place_id]
+
     def update_review(self, review_id, review_data):
         """
-        Update review data by their ID.
-
+        Update a review with the provided data.
+        
         Args:
-            review_id (str): The unique identifier of the review.
-            review_data (dict): Updated data in dict format.
-
+            review_id (str): The review's identifier.
+            review_data (dict): New review data.
+        
         Returns:
-            dict: A dictionary containing the review's updated details, or None if the user is not found.
+            Review: The updated review instance.
+        
+        Raises:
+            ValueError: If the review does not exist.
         """
-        # Retrieve the review by ID and update only given attributes
+        review = self.review_repo.get(review_id)
+        if not review:
+            raise ValueError("Review not found.")
+        
         updated_review = self.review_repo.update(review_id, review_data)
-        if not updated_review:
-            return None
+        return updated_review
 
-        # Return explicit review data to avoid returning a boolean
-        return {
-            'id': updated_review.id,
-            'title': updated_review.title,
-            'text': updated_review.text,
-        }
+    def delete_review(self, review_id):
+        """
+        Delete a review by its ID.
+        
+        Args:
+            review_id (str): The identifier of the review to delete.
+        
+        Returns:
+            bool: True if the review was deleted, False otherwise.
+        """
+        return self.review_repo.delete(review_id)
 
 # /////     AMENITY PART     ///// #
 
@@ -346,20 +356,6 @@ class HBnBFacade(InMemoryRepository):
             user: The Amenity instance corresponding to the provided ID, or None if not found.
         """
         return self.amenity_repo.get(amenity_id)
-
-    def get_amenity_by_attribute(self, **kwargs):
-        """
-        Retrieve a amenity from the repository by their specified attribute.
-        Args:
-            **kwargs: Attributes to search for
-        Returns:
-            User: The Amenity instance corresponding to the provided attribute, or None if not found.
-        """
-        # Extract the attribute and its value
-        attribute, value = next(iter(kwargs.items()))
-        
-        # Use the attribute and value to query the user repository
-        return self.amenity_repo.get_by_attribute(attribute, value)
     
     def get_all_amenities(self):
         """
