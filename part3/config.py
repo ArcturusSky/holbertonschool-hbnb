@@ -20,6 +20,21 @@ class DevelopmentConfig(Config):
     """
     DEBUG = True
 
+class ProductionConfig(Config):
+    """
+    Production-specific configuration.
+
+    Because when in production the Debugmode shouldn't be on
+    """
+    DEBUG = False
+
+class TestingConfig(Config):
+    """
+    Configuration meants for all testing.
+    """
+    TESTING = True
+
+
 # Dictionary to manage different configurations based on environment.
 config = {
     'development': DevelopmentConfig,  # Configuration for development environment
