@@ -1,6 +1,9 @@
 from flask import Flask
 from flask_restx import Api
+
+# Cybersecurity
 from flask_bcrypt import Bcrypt
+from flask_jwt_extended import JWTManager
 
 # Routes/namespaces for each entity
 from app.api.v1.users import user_api as user_namespace
@@ -9,6 +12,7 @@ from app.api.v1.places import place_api as place_namespace
 from app.api.v1.reviews import review_api as review_namespace
 
 password_hasher = Bcrypt()
+jwt_auth = JWTManager()
 
 def create_app(config_class="config.DevelopmentConfig"):
     """
@@ -26,12 +30,14 @@ def create_app(config_class="config.DevelopmentConfig"):
     app = Flask(__name__)
 
     # Create an instance of my password_hasher (Bcrypt) for this whole application
-    # To allow using hashing into my models
+    # To allow using hashing into my models with import
     password_hasher.init_app(app)
+
+    # Create an instance of JWT manager to create a secure token
+    jwt_auth.init_app(app)
 
     # Apply config (by default DevelopmentConfig)
     app.config.from_object(config_class)
-
 
     # Initialization of the API and its documentation
     api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API')
