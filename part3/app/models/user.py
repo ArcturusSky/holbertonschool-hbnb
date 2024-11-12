@@ -19,7 +19,8 @@ from .PseudoDataBase import (
 )
 
 # Hashing password
-from app import password_hasher
+# /// from app import password_hasher /// # moved into the method with
+# lazy import to avoid circular import
 
 
 class User(BaseModel):
@@ -81,13 +82,17 @@ class User(BaseModel):
     def hash_password(self, password):
         """
         Hashes the password before storing it.
+        with lazy import to avoid circular import
         """
+        from app import password_hasher
         self.hashed_password = password_hasher.generate_password_hash(password).decode('utf-8')
 
     def verify_password(self, password):
         """
         Verifies if the provided password matches the hashed password.
+        with lazy import to avoid circular import
         """
+        from app import password_hasher
         return password_hasher.check_password_hash(self.hashed_password, password)
 
     # Getter for is_admin
