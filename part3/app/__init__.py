@@ -1,11 +1,14 @@
 from flask import Flask
 from flask_restx import Api
+from flask_bcrypt import Bcrypt
 
 # Routes/namespaces for each entity
 from app.api.v1.users import user_api as user_namespace
 from app.api.v1.amenities import amenity_api as amenity_namespace
 from app.api.v1.places import place_api as place_namespace
 from app.api.v1.reviews import review_api as review_namespace
+
+password_hasher = Bcrypt()
 
 def create_app(config_class="config.DevelopmentConfig"):
     """
@@ -22,8 +25,13 @@ def create_app(config_class="config.DevelopmentConfig"):
     # Create an instance of Flask
     app = Flask(__name__)
 
+    # Create an instance of my password_hasher (Bcrypt) for this whole application
+    # To allow using hashing into my models
+    password_hasher.init_app(app)
+
     # Apply config (by default DevelopmentConfig)
     app.config.from_object(config_class)
+
 
     # Initialization of the API and its documentation
     api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API')
