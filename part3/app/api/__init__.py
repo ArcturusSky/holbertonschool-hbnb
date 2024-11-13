@@ -9,6 +9,7 @@ api = Api(api_bp, version='1.0', title="HBnB API", description="API for HBnB pro
 
 # Import namespace for handling operations
 from .v1.users import user_api as user_namespace
+from .v1.auth import login_api as login_namespace
 from .v1.places import place_api as place_namespace
 from .v1.reviews import review_api as review_namespace
 from .v1.amenities import amenity_api as amenity_namespace
@@ -18,3 +19,4 @@ api.add_namespace(user_namespace, path='/users')
 api.add_namespace(place_namespace, path='/places')
 api.add_namespace(review_namespace, path='/reviews')
 api.add_namespace(amenity_namespace, path='/amenities')
+api.add_namespace(login_namespace, path='/login')
