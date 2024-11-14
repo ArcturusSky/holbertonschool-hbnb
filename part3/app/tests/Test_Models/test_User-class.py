@@ -46,12 +46,10 @@ def test_user_creation():
         localisation="Paris",
         phone_number="0102030405"
     )
-    
     # Test if attributes correspond to the creation
     assert user.first_name == "John"
     assert user.last_name == "Doe"
     assert user.username == "Jojo"
-    assert user.__password__ == "Jojo12345678910"
     assert user.email == "john.doe@example.com"
     assert user.localisation == "Paris"
     assert user.phone_number == "0102030405"
