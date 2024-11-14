@@ -1,5 +1,5 @@
 from flask_restx import Namespace, Resource, fields
-from app.services import facade
+from app.api.v1.instance_facade import facade
 
 # Initialize the Namespace for reviews
 review_api = Namespace('reviews', description='Operations for managing reviews')

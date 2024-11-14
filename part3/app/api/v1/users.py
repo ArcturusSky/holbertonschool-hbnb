@@ -1,10 +1,8 @@
 from flask_restx import Namespace, Resource, fields
-from app.services.facade import HBnBFacade
+from app.api.v1.instance_facade import facade
 
 # Define the namespace for user operations
 user_api = Namespace('users', description='User operations')
-
-facade = HBnBFacade()
 
 # Define the user model for input validation and documentation
 user_model = user_api.model('User', {
@@ -40,7 +38,7 @@ class UserList(Resource):
             return {'error': f'Missing fields: {", ".join(missing_fields)}'}, 400
 
         # Check if username or email already in use
-        if facade.get_user_by_email(email=user_data['email']):
+        if facade.get_user_by_attribute(email=user_data['email']):
             return {'error': 'Email already registered'}, 409
         
         if facade.get_user_by_attribute(username=user_data['username']):
