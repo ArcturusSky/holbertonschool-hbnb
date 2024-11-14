@@ -10,6 +10,7 @@ class Config:
         DEBUG (bool): Indicates whether to enable debug mode. Default is False.
     """
     SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key')
+    JWT_SECRET_KEY = SECRET_KEY
     DEBUG = False
 
 class DevelopmentConfig(Config):
