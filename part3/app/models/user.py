@@ -1,6 +1,9 @@
 # Base for each class
 from .base_model import BaseModel
 
+# Hashing password
+# // Directly lazy import into methods
+
 # Validation of each attribute given by the user
 from .validation_checks import (
     email_validation,
@@ -17,10 +20,6 @@ from .PseudoDataBase import (
     email_list,
     phonenumber_list,
 )
-
-# Hashing password
-# /// from app import password_hasher /// # moved into the method with
-# lazy import to avoid circular import
 
 
 class User(BaseModel):
@@ -42,7 +41,8 @@ class User(BaseModel):
 
         # Validate and hash password
         password_validation(password)  # Check if strong enough
-        self.hash_password(password)   # Hash it
+        self.hash_password(password)  # Hash the password at instantiation
+
 
         # Check correct first and last name lengths and localisation
         name_length_validation50(first_name)

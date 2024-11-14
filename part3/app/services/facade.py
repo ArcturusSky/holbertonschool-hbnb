@@ -99,6 +99,9 @@ class HBnBFacade(InMemoryRepository):
         # Use the attribute and value to query the user repository
         return self.user_repo.get_by_attribute(attribute, value)
 
+    def get_user_by_email(self, email):
+        return self.user_repo.get_by_attribute('email', email)
+
     def get_all_users(self):
         """
         Retrieve a user from the repository 
