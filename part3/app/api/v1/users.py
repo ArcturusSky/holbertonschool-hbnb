@@ -40,14 +40,17 @@ class UserList(Resource):
             return {'error': f'Missing fields: {", ".join(missing_fields)}'}, 400
 
         # Check if username or email already in use
-        if facade.get_user_by_attribute(email=user_data['email']):
+        if facade.get_user_by_email(email=user_data['email']):
             return {'error': 'Email already registered'}, 409
         
         if facade.get_user_by_attribute(username=user_data['username']):
             return {'error': 'Username already registered'}, 409
 
-        # Create new user
-        new_user = facade.create_user(user_data)
+        # Create new user via the facade (password is already hashed in User class)
+        try:
+            new_user = facade.create_user(user_data)
+        except Exception as e:
+            return {'error': str(e)}, 400  # Handle any other error that may occur during user creation
         
         return {
             'first_name': new_user.first_name,
