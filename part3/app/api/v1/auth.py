@@ -1,8 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from app.services.facade import HBnBFacade
-
-facade = HBnBFacade()
+from app.api.v1.instance_facade import facade
 
 login_api = Namespace('login', description='Authentication operations')
 
@@ -18,17 +16,14 @@ class Login(Resource):
     def post(self):
         """Authenticate user and return a JWT token"""
         credentials = login_api.payload  # Get the email and password from the request payload
-        email = credentials["email"]
         password = credentials["password"]
 
         # Step 1: Retrieve the user based on the provided email
-        user = facade.get_user_by_email(email)
+        user = facade.get_user_by_attribute(email=credentials["email"])
         
         # Step 2: Check if the user exists and the password is correct
         # Étape de vérification du mot de passe
         if not user or not user.verify_password(password):
-            print("Mot de passe enregistré (haché) :", user.password_hash)  # Affiche le hachage du mot de passe
-            print("Mot de passe fourni :", password)  # Affiche le mot de passe brut pour vérification
             return {'error': 'Invalid credentials'}, 401
 
 
