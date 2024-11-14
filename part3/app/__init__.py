@@ -10,6 +10,7 @@ from app.api.v1.users import user_api as user_namespace
 from app.api.v1.amenities import amenity_api as amenity_namespace
 from app.api.v1.places import place_api as place_namespace
 from app.api.v1.reviews import review_api as review_namespace
+from app.api.v1.auth import login_api as login_namespace
 
 password_hasher = Bcrypt()
 jwt_auth = JWTManager()
@@ -47,4 +48,5 @@ def create_app(config_class="config.DevelopmentConfig"):
     api.add_namespace(amenity_namespace, path='/api/v1/amenities')
     api.add_namespace(place_namespace, path='/api/v1/places')
     api.add_namespace(review_namespace, path='/api/v1/reviews')
+    api.add_namespace(login_namespace, path='/api/v1/login')
     return app
