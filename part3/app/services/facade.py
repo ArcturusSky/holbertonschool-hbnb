@@ -9,12 +9,7 @@ from app.models.validation_checks import (
     email_validation,
     phone_validation,
     password_validation,
-    adress_validation,
-    place_validation,
-    description_validation,
-    price_validation,
     title_validation,
-    rating_validation,
 )
 
 class HBnBFacade(InMemoryRepository):
@@ -36,18 +31,6 @@ class HBnBFacade(InMemoryRepository):
         self.place_repo = InMemoryRepository()
         self.review_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
-
-# /////     TOOL    ///// #
-
-    def clear(self):
-            """
-            Clean all data in repo for testing purpose
-            """
-
-            self.user_repo = {}
-            self.place_repo = {}
-            self.review_repo = {}
-            self.amenity_repo = {}
 
 # /////     USER PART     ///// #
 
@@ -98,9 +81,6 @@ class HBnBFacade(InMemoryRepository):
         
         # Use the attribute and value to query the user repository
         return self.user_repo.get_by_attribute(attribute, value)
-
-    def get_user_by_email(self, email):
-        return self.user_repo.get_by_attribute('email', email)
 
     def get_all_users(self):
         """
