@@ -8,7 +8,7 @@ class Amenity(BaseModel):
     """
 
     # Initialisation of the Amenity class
-    def __init__(self, title):
+    def __init__(self, amenity_name):
         """
         Create instance of amenity.
         """
@@ -16,10 +16,10 @@ class Amenity(BaseModel):
         # Get attributes from super class (BaseModel)
         super().__init__()
 
-        # Check if title valid
-        title_validation(title)
-        self.title = title
+        # Check if amenity_name valid
+        title_validation(amenity_name)
+        self.amenity_name = amenity_name
 
         # Add the ID (from the BaseModel) to the amenity id list.
         amenity_id_list.append(id)
-        amenity_list.append(title)
+        amenity_list.append(amenity_name)
