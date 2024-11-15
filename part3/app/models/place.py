@@ -18,7 +18,7 @@ class Place(BaseModel):
     # Initialisation of the Place class
     def __init__(self, placename, description, price, latitude, longitude, owner):
         """
-        Create instance of place.
+        Create instance of place1.
         """
 
         # Get attributes from super class (BaseModel)
@@ -28,6 +28,8 @@ class Place(BaseModel):
         places_id_list.append(id)
 
         # Check if coordinates are valid and create tuple of theses
+        self.latitude = latitude
+        self.longitude = longitude
         self.adress = adress_validation(latitude, longitude)
 
         # Check if place doesn't already exist
@@ -46,12 +48,8 @@ class Place(BaseModel):
         given_owner_validation(owner)
         self.owner = owner
 
-        # Getting the ID of the owner
-        """placeholder"""
-
-        self.myownerID = "placeholder"
-        self.myreviews = []  # List to store related reviews
-        self.myamenities = []  # List to store related amenities
+        self.reviews = []  # List to store related reviews
+        self.amenities = []  # List to store related amenities
 
         # Add the place info into the PseudoDataBase
         placename_list.append(self.placename)
@@ -65,4 +63,4 @@ class Place(BaseModel):
 
     def add_amenity(self, amenity):
         """Add an amenity to the place."""
-        self.myamenities.append(amenity)
+        self.amenities.append(amenity)
