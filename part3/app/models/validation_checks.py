@@ -62,7 +62,7 @@ def password_validation(password):
 
 def adress_validation(latitude, longitude):
     """Validate if latitue and longitude are valids."""
-    if not -90 < latitude < 90 or not -180 < longitude < 180:
+    if not -90 <= latitude <= 90 or not -180 <= longitude <= 180:
         raise ValueError("Coordinates are invalids.")
     else:
         adress = (latitude, longitude)
@@ -116,14 +116,6 @@ def rating_validation(rating):
         raise ValueError("Rating must be between 1 and 5")
     else:
         return rating
-
-def existing_place_validation(placename):
-    """Check if place exist"""
-
-    if placename not in placename_list:
-        raise ValueError("Place doesn't exist")
-    else:
-        return placename
 
     # Check if user exist (used owner validation)
 
