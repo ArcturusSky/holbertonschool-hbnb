@@ -3,7 +3,6 @@ from .validation_checks import (
     title_validation,
     description_validation,
     rating_validation,
-    existing_place_validation,
     given_owner_validation
 )
 from .PseudoDataBase import review_id_list, review_list
@@ -13,37 +12,30 @@ class Review(BaseModel):
     Represents a review with attributes inherited from BaseModel.
     """
 
-    # Initialisation of the Review class
-    def __init__(self, title, text, rating, placename, owner):
+    def __init__(self, title, text, rating, place_id, owner):
         """
         Create instance of review.
         """
 
-        # Get attributes from super class (BaseModel)
         super().__init__()
 
         # Add the ID (from the BaseModel) to the review id list.
-        review_id_list.append(id)
+        review_id_list.append(self.id)
 
-        # Check if title is valid
+        # Validate attributes
         title_validation(title)
         self.title = title
 
-        # Check if text is valid
         description_validation(text)
         self.text = text
 
-        # Check if rating is valid
         rating_validation(rating)
         self.rating = rating
 
-        # Check if place exist
-        existing_place_validation(placename)
-        self.placename = placename
-
-        # Check if user (by user id) exist
-        given_owner_validation
+        given_owner_validation(owner)
         self.owner = owner
 
+        self.place_id = place_id
+
         # Add data to the PseudoDatabase
-        review_list.append(self.title)
+        review_list.append(self)
