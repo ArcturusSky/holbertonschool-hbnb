@@ -7,7 +7,7 @@ place_api = Namespace('places', description='Place operations')
 # Define the models for related entities
 amenity_model = place_api.model('PlaceAmenity', {
     'id': fields.String(description='Amenity ID'),
-    'name': fields.String(description='Name of the amenity')
+    'amenity_name': fields.String(description='Name of the amenity')
 })
 
 user_model = place_api.model('PlaceUser', {
@@ -19,7 +19,7 @@ user_model = place_api.model('PlaceUser', {
 
 # Define the place model for input validation and documentation
 place_model = place_api.model('Place', {
-    'title': fields.String(required=True, description='Title of the place'),
+    'placename': fields.String(required=True, description='Name of the place'),
     'description': fields.String(description='Description of the place'),
     'price': fields.Float(required=True, description='Price per night'),
     'latitude': fields.Float(required=True, description='Latitude of the place'),
@@ -38,7 +38,7 @@ class PlaceList(Resource):
         place_data = place_api.payload
 
         # Validate required fields
-        required_fields = ['title', 'price', 'latitude', 'longitude', 'owner_id']
+        required_fields = ['placename', 'price', 'latitude', 'longitude', 'owner_id']
         missing_fields = [field for field in required_fields if field not in place_data]
         if missing_fields:
             return {'error': f'Missing fields: {", ".join(missing_fields)}'}, 400
@@ -48,17 +48,23 @@ class PlaceList(Resource):
         if not owner:
             return {'error': 'Owner not found'}, 400
 
-        # Validate each amenity ID
-        invalid_amenities = [amenity_id for amenity_id in place_data['amenities'] 
-                             if not facade.get_amenity_by_id(amenity_id)]
-        if invalid_amenities:
-            return {'error': f'Invalid amenities: {", ".join(invalid_amenities)}'}, 400
-
+        # Process amenities
+        amenity_ids = []
+        if 'amenities' in place_data:
+            for amenity_name in place_data['amenities']:
+                amenity = facade.get_amenity_by_name(amenity_name)
+                if not amenity:
+                    amenity = facade.create_amenity({'amenity_name': amenity_name})
+                amenity_ids.append(amenity.id)
+        
+        # Replace amenity names with amenity IDs
+        place_data['amenities'] = amenity_ids
+    
         # Create new place
         new_place = facade.create_place(place_data)
 
         return {
-            'title': new_place.title,
+            'placename': new_place.placename,
             'place_id': new_place.id,
             'description': new_place.description,
             'price': new_place.price,
@@ -70,7 +76,7 @@ class PlaceList(Resource):
                 'last_name': owner.last_name,
                 'email': owner.email
             },
-            'amenities': [{'id': amenity.id, 'name': amenity.name} for amenity in new_place.amenities]
+            'amenities': [{'id': amenity.id, 'amenity_name': amenity.amenity_name} for amenity in new_place.amenities]
         }, 201
 
 @place_api.route('/all_places')
@@ -78,14 +84,14 @@ class ShowAllPlaces(Resource):
     @place_api.response(200, 'List of places retrieved successfully')
     def get(self):
         """Retrieve a list of all places"""
-        all_places = facade.get_all_places()
+        all_places = facade.get_all_place()
 
         if not all_places:
             return {'error': 'No places found'}, 404
 
         places_data = [
             {
-                'title': place.title,
+                'placename': place.placename,
                 'place_id': place.id,
                 'description': place.description,
                 'price': place.price,
@@ -97,7 +103,7 @@ class ShowAllPlaces(Resource):
                     'last_name': place.owner.last_name,
                     'email': place.owner.email
                 },
-                'amenities': [{'id': amenity.id, 'name': amenity.name} for amenity in place.amenities]
+                'amenities': [{'id': amenity.id, 'amenity_name': amenity.amenity_name} for amenity in place.amenities]
             }
             for place in all_places
         ]
@@ -115,7 +121,7 @@ class PlaceResource(Resource):
 
         return {
             'id': place.id,
-            'title': place.title,
+            'placename': place.placename,
             'description': place.description,
             'price': place.price,
             'latitude': place.latitude,
@@ -126,7 +132,7 @@ class PlaceResource(Resource):
                 'last_name': place.owner.last_name,
                 'email': place.owner.email
             },
-            'amenities': [{'id': amenity.id, 'name': amenity.name} for amenity in place.amenities]
+            'amenities': [{'id': amenity.id, 'amenity_name': amenity.amenity_name} for amenity in place.amenities]
         }, 200
 
     @place_api.expect(place_model)
@@ -147,11 +153,13 @@ class PlaceResource(Resource):
             if not owner:
                 return {'error': 'Owner not found'}, 400
 
+        # Process amenities
         if 'amenities' in place_data:
-            invalid_amenities = [amenity_id for amenity_id in place_data['amenities'] 
-                                 if not facade.get_amenity_by_id(amenity_id)]
-            if invalid_amenities:
-                return {'error': f'Invalid amenities: {", ".join(invalid_amenities)}'}, 400
+            for amenity_name in place_data['amenities']:
+                # Check if amenity exists, if not create it
+                amenity = facade.get_amenity_by_name(amenity_name)
+                if not amenity:
+                    amenity = facade.create_amenity({'amenity_name': amenity_name})
 
         # Update place
         updated_place = facade.update_place(place_id, place_data)
@@ -160,7 +168,7 @@ class PlaceResource(Resource):
 
         return {
             'id': updated_place.id,
-            'title': updated_place.title,
+            'placename': updated_place.placename,
             'description': updated_place.description,
             'price': updated_place.price,
             'latitude': updated_place.latitude,
@@ -171,5 +179,6 @@ class PlaceResource(Resource):
                 'last_name': updated_place.owner.last_name,
                 'email': updated_place.owner.email
             },
-            'amenities': [{'id': amenity.id, 'name': amenity.name} for amenity in updated_place.amenities]
+            'amenities': [{'id': amenity.id, 'amenity_name': amenity.amenity_name} 
+                          for amenity in getattr(updated_place, 'amenities', [])]
         }, 200
