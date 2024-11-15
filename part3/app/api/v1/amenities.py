@@ -6,7 +6,7 @@ amenity_api = Namespace('amenities', description='Amenity operations')
 
 # Define the amenity model for input validation and documentation
 amenity_model = amenity_api.model('Amenity', {
-    'title': fields.String(required=True, title='Name of the amenity')
+    'amenity_name': fields.String(required=True, amenity_name='Name of the amenity')
 })
 
 @amenity_api.route('/')
@@ -20,7 +20,7 @@ class AmenityList(Resource):
         amenity_data = amenity_api.payload
 
         # Validate required fields
-        required_field = ['title']
+        required_field = ['amenity_name']
         if any(field not in amenity_data for field in required_field):
             return {'error': f'Missing fields: {", ".join(required_field)}'}, 400
 
@@ -28,7 +28,7 @@ class AmenityList(Resource):
         new_amenity = facade.create_amenity(amenity_data)
 
         return {
-            'title': new_amenity.title,
+            'amenity_name': new_amenity.amenity_name,
             'amenity_id': new_amenity.id
         }, 201
 
@@ -48,7 +48,7 @@ class ShowAllAmenities(Resource):
         amenities_data = [
             {
                 'id': amenity.id,
-                'title': amenity.title,
+                'amenity_name': amenity.amenity_name,
             }
             for amenity in all_amenities
         ]
@@ -66,7 +66,7 @@ class AmenityResource(Resource):
 
         return {
             'id': amenity.id,
-            'title': amenity.title,
+            'amenity_name': amenity.amenity_name,
         }, 200
 
     @amenity_api.expect(amenity_model)
