@@ -86,15 +86,27 @@ After putting the 3 Carmines profiles, trying getting all users:
 
 ```bash
 {
-  "title": "The Tower",
+  "placename": "The Tower",
   "description": "The Tower of Carmilla Carmines, OverLord",
   "price": 15000,
   "latitude": -90,
   "longitude": -180,
-  "owner_id": "e6b9e3de-8f22-4e64-8a6f-2079c7ec5090",
+  "owner_id": "f8c0259d-58cb-4f86-8abf-e473dc9616e5",
   "amenities": [
     "wifi", "angelic weapons"
   ]
 }
 ```
-...
+## Review methods
+
+### POST
+
+```bash
+{
+  "title": "I love this place!",
+  "text": "This is the best place ever!!",
+  "rating": 5,
+  "user_id": "959a0421-8088-42d7-aa4d-098c68e36339",
+  "place_id": "4df3a108-97c0-4f1c-9c4d-71060dfe7213"
+}
+```
