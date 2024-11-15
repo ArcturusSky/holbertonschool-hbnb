@@ -32,6 +32,18 @@ class HBnBFacade(InMemoryRepository):
         self.review_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
 
+# /////     TOOL    ///// #
+
+    def clear(self):
+            """
+            Clean all data in repo for testing purpose
+            """
+
+            self.user_repo._storage = {}
+            self.place_repo._storage = {}
+            self.review_repo._storage = {}
+            self.amenity_repo._storage = {}
+
 # /////     USER PART     ///// #
 
     def create_user(self, user_data):
@@ -132,7 +144,7 @@ class HBnBFacade(InMemoryRepository):
 
         # Create new instance of place associating the owner
         new_place = Place(
-            title = place_data['title'],
+            placename = place_data['placename'],
             description = place_data.get('description', ''),
             price = place_data['price'],
             latitude = place_data['latitude'],
@@ -140,10 +152,13 @@ class HBnBFacade(InMemoryRepository):
             owner = owner  # Associate the owner found in the previous check
         )
 
-        # Managed amenities if provided
+        # Manage amenities if provided
         if 'amenities' in place_data:
-            amenities = [self.get_amenity_by_id(aid) for aid in place_data['amenities']]
-            new_place.amenities = [amenity for amenity in amenities if amenity]
+            for amenity_name in place_data['amenities']:
+                amenity = self.get_amenity_by_name(amenity_name)
+                if not amenity:
+                    amenity = self.create_amenity({'amenity_name': amenity_name})
+                new_place.add_amenity(amenity)
 
         self.place_repo.add(new_place)
 
@@ -196,19 +211,49 @@ class HBnBFacade(InMemoryRepository):
             place_data (dict): Updated data in dict format.
 
         Returns:
-            dict: A dictionary containing the place's updated details, or None if the user is not found.
+            Place: The updated Place object, or None if the place is not found.
         """
-        # Retrieve the place by ID and update only given attributes
-        updated_place = self.place_repo.update(place_id, place_data)
-        if not updated_place:
+        # Retrieve the place by ID
+        place = self.place_repo.get(place_id)
+        if not place:
             return None
 
-        # Return explicit place data to avoid returning a boolean
-        return {
-            'id': updated_place.id,
-            'title': updated_place.title,
-            'text': updated_place.text,
+        # Update basic attributes
+        for key, value in place_data.items():
+            if key not in ['owner_id', 'amenities']:
+                setattr(place, key, value)
+
+        # Update owner if provided
+        if 'owner_id' in place_data:
+            new_owner = self.get_user_by_id(place_data['owner_id'])
+            if new_owner:
+                place.owner = new_owner
+
+        # Update amenities if provided
+        if 'amenities' in place_data:
+            # Clear existing amenities
+            place.amenities = []
+            for amenity_name in place_data['amenities']:
+                amenity = self.get_amenity_by_name(amenity_name)
+                if not amenity:
+                    amenity = self.create_amenity({'amenity_name': amenity_name})
+                place.add_amenity(amenity)
+
+        # Prepare updated data dictionary
+        updated_data = {
+            'placename': place.placename,
+            'description': place.description,
+            'price': place.price,
+            'latitude': place.latitude,
+            'longitude': place.longitude,
+            'owner': place.owner,
+            'amenities': place.amenities
         }
+
+        # Save the updated place
+        updated_place = self.place_repo.update(place_id, updated_data)
+
+        return updated_place
 
 # /////     REVIEW PART     ///// #
 
@@ -234,13 +279,23 @@ class HBnBFacade(InMemoryRepository):
         # Validate user and place existence
         user = self.user_repo.get(review_data['user_id'])
         place = self.place_repo.get(review_data['place_id'])
+
         if not user:
             raise ValueError("User not found.")
         if not place:
             raise ValueError("Place not found.")
         
-        # Create the review
-        review = self.review_repo.add(review_data)
+        # Create the review instance
+        review = Review(
+            title=review_data['title'],
+            text=review_data['text'],
+            rating=review_data['rating'],
+            place_id=review_data['place_id'],
+            owner=user
+        )
+
+        # Add the review to the repository
+        self.review_repo.add(review)
         return review
 
     def get_review(self, review_id):
@@ -260,9 +315,16 @@ class HBnBFacade(InMemoryRepository):
         Retrieve all reviews.
         
         Returns:
-            list[Review]: List of all reviews.
+            list[dict]: List of all reviews as dictionaries.
         """
-        return self.review_repo.get_all()
+        reviews = self.review_repo.get_all()
+        return [{'id': review.id,
+                'title': review.title,
+                'text': review.text,
+                'rating': review.rating,
+                'user_id': review.owner.id,
+                'place_id': review.place_id}
+                for review in reviews]
 
     def get_reviews_by_place(self, place_id):
         """
@@ -274,7 +336,7 @@ class HBnBFacade(InMemoryRepository):
         Returns:
             list[Review]: List of reviews for the specified place.
         """
-        return [review for review in self.review_repo.get_all() if review['place_id'] == place_id]
+        return [review for review in self.review_repo.get_all() if review.place_id == place_id]
 
     def update_review(self, review_id, review_data):
         """
@@ -294,8 +356,12 @@ class HBnBFacade(InMemoryRepository):
         if not review:
             raise ValueError("Review not found.")
         
-        updated_review = self.review_repo.update(review_id, review_data)
-        return updated_review
+        # Update attributes
+        for key, value in review_data.items():
+            setattr(review, key, value)
+
+        self.review_repo.update(review_id, review)
+        return review
 
     def delete_review(self, review_id):
         """
@@ -315,18 +381,19 @@ class HBnBFacade(InMemoryRepository):
             """
             Create and add a new amenity to the amenity repository.
             Args:
-                amenity_data (dict): A dictionary containing amenity attribute (title).
+                amenity_data (dict): A dictionary containing amenity attribute (amenity_name).
             Returns:
                 amenity: The created amenity instance.
             """
 
             # Try all the validations from validations checks
             try:
-                title_validation(amenity_data['title'])
+                title_validation(amenity_data['amenity_name'])
             except ValueError as e:
                 return {"error": str(e)}, 400 
             
             amenity = Amenity(**amenity_data)
+
             self.amenity_repo.add(amenity)
             return amenity
 
@@ -340,6 +407,16 @@ class HBnBFacade(InMemoryRepository):
         """
         return self.amenity_repo.get(amenity_id)
     
+    def get_amenity_by_name(self, amenity_name):
+        """
+        Retrieve a amenity from the repository by their ID.
+        Args:
+            amenity_id (str): The ID of the amenity to retrieve.
+        Returns:
+            user: The Amenity instance corresponding to the provided ID, or None if not found.
+        """
+        return self.amenity_repo.get(amenity_name)
+
     def get_all_amenities(self):
         """
         Retrieve all amenities from the repository 
@@ -371,5 +448,5 @@ class HBnBFacade(InMemoryRepository):
         # Return explicit amenity data to avoid returning a boolean
         return {
             'id': updated_amenity.id,
-            'title': updated_amenity.title
+            'amenity_name': updated_amenity.amenity_name
         }
