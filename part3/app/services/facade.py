@@ -317,14 +317,7 @@ class HBnBFacade(InMemoryRepository):
         Returns:
             list[dict]: List of all reviews as dictionaries.
         """
-        reviews = self.review_repo.get_all()
-        return [{'id': review.id,
-                'title': review.title,
-                'text': review.text,
-                'rating': review.rating,
-                'user_id': review.owner.id,
-                'place_id': review.place_id}
-                for review in reviews]
+        return self.review_repo.get_all()
 
     def get_reviews_by_place(self, place_id):
         """
