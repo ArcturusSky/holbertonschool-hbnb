@@ -1,4 +1,5 @@
 from flask_restx import Namespace, Resource, fields
+from flask import jsonify
 from app.api.v1.instance_facade import facade
 
 # Initialize the Namespace for reviews
@@ -34,11 +35,32 @@ class ReviewList(Resource):
         except ValueError as e:
             return {'message': str(e)}, 400
 
-    @review_api.response(200, 'List of all reviews retrieved successfully')
+@review_api.route('/all')
+class ShowAllReviews(Resource):
+    """Resource for showing all reviews."""
+
+    @review_api.response(200, 'Reviews details retrieved successfully')
+    @review_api.response(404, 'No review found')
     def get(self):
-        """Retrieve all reviews"""
-        reviews = facade.get_all_reviews()
-        return reviews, 200
+        """Retrieve all reviews."""
+        all_reviews = facade.get_all_reviews()
+        
+        if not all_reviews:
+            return {'error': 'No review found'}, 404
+
+        reviews_data = [
+            {
+                'title':review.title,
+                'id': review.id,
+                'text': review.text,
+                'rating': review.rating,
+                'user_id': review.owner.id,
+                'place_id': review.place_id
+            }
+            for review in all_reviews
+        ]
+        
+        return reviews_data, 200
 
 @review_api.route('/<string:review_id>')
 class ReviewResource(Resource):
@@ -58,14 +80,18 @@ class ReviewResource(Resource):
             'place_id': review.place_id
         }, 200
 
-    @review_api.expect(review_model)
+
+@review_api.route('/<string:review_id>')
+class ReviewResource(Resource):
+    @review_api.expect(review_model, partial=True)
     @review_api.response(200, 'Review updated successfully')
     @review_api.response(404, 'Review not found')
     @review_api.response(400, 'Invalid input data')
     def put(self, review_id):
         """Update a review by ID"""
+        review_data = review_api.payload
+        
         try:
-            review_data = review_api.payload
             updated_review = facade.update_review(review_id, review_data)
             return {
                 'title': updated_review.title,
@@ -76,13 +102,16 @@ class ReviewResource(Resource):
                 'place_id': updated_review.place_id
             }, 200
         except ValueError as e:
-            return {'message': str(e)}, 404
+            return {'error': str(e)}, 400
 
+@review_api.route('/delete/<string:review_id>')
+class DeleteReview(Resource):
     @review_api.response(200, 'Review deleted successfully')
     @review_api.response(404, 'Review not found')
     def delete(self, review_id):
         """Delete a review by ID"""
         deleted = facade.delete_review(review_id)
+
         if not deleted:
             return {'message': 'Review not found'}, 404
         return {'message': 'Review deleted successfully'}, 200
@@ -94,6 +123,20 @@ class PlaceReviewList(Resource):
     def get(self, place_id):
         """Retrieve all reviews associated with a specific place by its ID"""
         reviews = facade.get_reviews_by_place(place_id)
+        
         if not reviews:
             return {'message': 'No reviews found for this place'}, 404
-        return reviews, 200
+
+        reviews_list = [
+            {
+                'id': review.id,
+                'title': review.title,
+                'text': review.text,
+                'rating': review.rating,
+                'user_id': review.owner.id,
+                'place_id': review.place_id
+            }
+            for review in reviews
+        ]
+
+        return reviews_list, 200
